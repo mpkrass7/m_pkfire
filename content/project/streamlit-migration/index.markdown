@@ -1,0 +1,33 @@
+---
+title: Exploring US Migration with Streamlit
+author: Marshall Krassenstein
+date: '2021-09-05'
+slug: streamlit-app
+categories: []
+tags: [Python, Webapp]
+subtitle: ''
+summary: 'An app I built to explore migration in the United States'
+authors: []
+lastmod: '2021-09-05T13:33:09-04:00'
+featured: no
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+projects: []
+---
+
+
+At DataRobot, I had a project in collaboration with the office of Housing and Urban Development (HUD). They asked us to look at some form of movement data and tell them what where people were moving in the wake of Covid-19. At the time of the project, the 2020 census data had not yet been released, and finding where people were moving was nearly impossible without buying a large dataset. Saddened but still interested in migration patterns generally, I decided to grab the US migration data from ipums from 2019 and build a Streamlit app out of it. Hopefully I'll get a chance to update it once 2020 census data comes out!
+
+
+![Migration App](migration_demo.gif)
+<!-- <div> -->
+<!-- <img src="migration_demo.gif" alt="Migration app" style="text-align: center;> -->
+<!-- </div> -->
+
+Play with US migration app [here](https://share.streamlit.io/mpkrass7/solid-octo-robot/migration_app.py).
+
+Streamlit makes building simple web apps really easy. Check it out [here](https://streamlit.io/).
+
+Feel free to [repo](https://github.com/mpkrass7/solid-octo-robot) if you want an example to make your own!

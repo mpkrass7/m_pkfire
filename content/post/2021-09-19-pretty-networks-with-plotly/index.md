@@ -18,9 +18,6 @@ image:
 projects: []
 ---
 
-
-# How to color the top 20 nodes over the rest of the nodes in NetworkX
-
 I will occassionally look around Stackoverflow for questions I can answer to practice coding and explaining my solutions. The other day,I was searching around and saw a NetworkX question. Having some experience with network analysis (although much more with iGraph), I figured I'd try my hand at answering it. Another person beat me to the post, but at his encouragement I added my own spin on it using Plotly. So, if you find yourself struggling to plot a coherent network graph, read on!
 
 ## Question
