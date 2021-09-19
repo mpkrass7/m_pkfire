@@ -1,12 +1,12 @@
 ---
 title: Hi Hugo
 author: R package build
-date: '2021-09-18'
+date: '2020-09-18'
 slug: hi-hugo
 categories: []
 tags: []
 subtitle: ''
-summary: ''
+summary: 'A demonstration of putting a markdown file together'
 authors: []
 lastmod: '2021-09-18T13:33:09-04:00'
 featured: no

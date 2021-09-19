@@ -1,7 +1,6 @@
 ---
 authors:
-- admin
-- 吳恩達
+- The Wowchemy Team
 categories:
 - Demo
 - 教程
