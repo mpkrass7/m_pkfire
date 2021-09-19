@@ -5,6 +5,7 @@ widget: experience
 
 # This file represents a page section.
 headless: true
+active: false
 
 # Order that this section appears on the page.
 weight: 40
@@ -22,8 +23,8 @@ date_format: Jan 2006
 #   Leave `date_end` empty if it's your current employer.
 #   Begin multi-line descriptions with YAML's `|2-` multi-line prefix.
 experience:
-  - title: CEO
-    company: GenCoin
+  - title: Data Scientist
+    company: DataRobot
     company_url: ''
     company_logo: org-gc
     location: California
@@ -35,15 +36,16 @@ experience:
         * Analysing
         * Modelling
         * Deploying
+        * Demos
         
-  - title: Professor of Semiconductor Physics
-    company: University X
+  - title: Data Scientist
+    company: PNC Financial Services
     company_url: ''
     company_logo: org-x
-    location: California
-    date_start: '2016-01-01'
-    date_end: '2020-12-31'
-    description: Taught electronic engineering and researched semiconductor physics.
+    location: Pittsburgh
+    date_start: '2017-01-01'
+    date_end: '2021-01-18'
+    description: 
 
 design:
   columns: '2'

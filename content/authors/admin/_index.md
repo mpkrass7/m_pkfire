@@ -1,5 +1,5 @@
 ---
-bio: I am certainly not a researcher, but I like the look of this research oriented blog
+bio: Data Scientist at DataRobot
 education:
   courses:
   - course: MS Computational Analytics
@@ -11,11 +11,10 @@ education:
 email: "mpkrass@gmail.com"
 highlight_name: true
 interests:
-- Coding Stuff
 - Machine Learning
 - Interactive Visualization
-- Teaching
-- Smoothies
+- Dabbling in Software Engineering
+
 organizations:
 - name: DataRobot
   url: https://www.datarobot.com/
@@ -39,6 +38,7 @@ social:
 - icon: linkedin
   icon_pack: fab
   link: https://www.linkedin.com/in/marshall-krassenstein/
+
 superuser: true
 title: Marshall Krassenstein
 ---

@@ -8,6 +8,7 @@ header:
   image: ""
 share: false
 title: Terms
+active: false
 ---
 
 ...

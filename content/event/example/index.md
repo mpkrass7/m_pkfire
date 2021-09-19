@@ -1,4 +1,5 @@
 ---
+active: false
 abstract: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellusac
   convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed ac
   faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis sapien
@@ -20,10 +21,10 @@ image:
   caption: 'Image credit: [**Unsplash**](https://unsplash.com/photos/bzdhc5b3Bxs)'
   focal_point: Right
 links:
-- icon: twitter
-  icon_pack: fab
-  name: Follow
-  url: https://twitter.com/georgecushen
+# - icon: twitter
+#   icon_pack: fab
+#   name: Follow
+#   url: https://twitter.com/georgecushen
 location: Wowchemy HQ
 projects:
 - internal-project

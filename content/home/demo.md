@@ -10,15 +10,15 @@ active: true
 headless: true
 
 # Order that this section appears on the page.
-weight: 15
+weight: 300
 
-title: Hugo Academic Theme Demo
+title: 
 subtitle:
 
 design:
   columns: "1"
   background:
-    image: open-book.jpg
+    image: reading_stuff.jpg
     image_darken: 1.0
     image_parallax: true
     image_position: center
@@ -28,16 +28,26 @@ design:
     padding: ["20px", "0", "20px", "0"]
 ---
 
-Welcome to the demo of the **academic resumé template** for Wowchemy, the Website Builder for Hugo.
+<!-- Welcome to the demo of the **academic resumé template** for Wowchemy, the Website Builder for Hugo.
 
 [Explore similar templates](https://wowchemy.com/templates/)
 
 **Over 500,000 [Amazing Websites](https://wowchemy.com/) have Already Been Built with Wowchemy**
 
-**[Join](https://wowchemy.com/templates/) the Most Empowered Hugo Community**
-
-{{% callout note %}}
+**[Join](https://wowchemy.com/templates/) the Most Empowered Hugo Community** -->
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+<!-- {{% callout note %}}
 This homepage section is an example of adding [elements](https://wowchemy.com/docs/content/writing-markdown-latex/) to the [*Blank* widget](https://wowchemy.com/docs/getting-started/page-builder/).
 
 Backgrounds can be applied to any section. Here, the *background* option is set give an *image parallax* effect.
-{{% /callout %}}
+{{% /callout %}} -->

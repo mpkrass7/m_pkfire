@@ -1,7 +1,8 @@
 ---
+active: false
 widget: hero
 headless: true
-weight: 10
+weight: 1
 title: Hugo Academic Starter
 hero_media: hero-academic.png
 cta:
@@ -20,6 +21,7 @@ design:
     text_color_light: true
 advanced:
   css_class: fullscreen
+
 ---
 
 **The FREE, Hugo-based open source website builder and template trusted by 500,000+ sites.**
