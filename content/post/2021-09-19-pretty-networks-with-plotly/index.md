@@ -18,10 +18,9 @@ image:
 projects: []
 ---
 
-I will occassionally look around Stackoverflow for questions I can answer to practice coding and explaining my solutions. The other day,I was searching around and saw a NetworkX question. Having some experience with network analysis (although much more with iGraph), I figured I'd try my hand at answering it. Another person beat me to the post, but at his encouragement I added my own spin on it using Plotly. So, if you find yourself struggling to plot a coherent network graph, read on!
+I will occassionally look around Stackoverflow for questions I can answer to practice coding and explaining my solutions. The other day, I was searching around and saw a NetworkX question. Having some experience with network analysis (although much more with iGraph), I figured I'd try my hand at answering it. Another person beat me to the post, but at his encouragement I added my own spin on it using Plotly. So, if you find yourself struggling to plot a coherent network graph, read on!
 
 ## Question
-
 
 **Does anyone know how to color the top 20 nodes over the rest of the nodes in NetworkX? I would like to color the top 20 nodes with green and the rest with gray. However, the output only shows gray because the green nodes were under the gray nodes. Would it be possible to make those green nodes over the gray nodes? In addition, would it be possible to show the top 20 green nodes to be sized in 20 and the rest of gray nodes to be sized in 10? Currently, all the nodes are sized in 10.**
 

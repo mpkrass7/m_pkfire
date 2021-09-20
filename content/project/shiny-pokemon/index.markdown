@@ -7,7 +7,7 @@ categories: []
 tags: [R, Shiny, Webapp]
 subtitle: ''
 summary: 'An app I built to show users Persistent Storage in Shiny.'
-authors: []
+authors: [Marshall Krassenstein]
 lastmod: '2020-06-18T13:33:09-04:00'
 featured: no
 image:
@@ -28,11 +28,17 @@ As shown above, the application allows users to pick there favorite Pokemon amon
 
 In addition to the database piece I have a pretty pithy analysis page that uses Principal Component Analysis to put Pokemon on a two-dimensional plane for some directional comparison. Ever wonder how similar Psyduck is to Bulbasaur? Try looking at the tab marked 'analysis'. Getting the Pokemon images to dynamically render on my Plotly object is still one of my favorite visualization accomplishments to date.
 
-View the app [here](https://marshallp.shinyapps.io/pokeshiny/). Don't forget to submit your favorite Pokemon!
+Play with the app below or view it [here](https://marshallp.shinyapps.io/pokeshiny/) (it's better). Don't forget to submit your favorite Pokemon!
+
+<iframe src="https://marshallp.shinyapps.io/pokeshiny/" width="1152" height="900px"></iframe>
+
 
 #### Do you like Shiny and want persistent storage for free?
 
 Follow the Medium article I wrote [here](https://medium.com/swlh/two-way-analytics-with-r-shiny-and-pokemon-e9eae225fd46)
-Or look at my repo [here](https://github.com/mpkrass7/shiny_pokemon)
+Or look at my repo [here](https://github.com/mpkrass7/shiny_pokemon).
 
-![PCA](poke_shiny2.gif)
+<!-- ![PCA](poke_shiny2.gif) -->
+
+
+
