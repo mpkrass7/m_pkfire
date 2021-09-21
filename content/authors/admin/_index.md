@@ -1,5 +1,5 @@
 ---
-bio: Data Scientist at DataRobot
+bio: Data Scientist at DataRobot. Likes running, climbing and smoothies
 education:
   courses:
   - course: MS Computational Analytics
