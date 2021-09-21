@@ -27,7 +27,7 @@ experience:
     company: DataRobot
     company_url: ''
     company_logo: org-gc
-    location: California
+    location: Boston
     date_start: '2021-01-01'
     date_end: ''
     description: |2-
