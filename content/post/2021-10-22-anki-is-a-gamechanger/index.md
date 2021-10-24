@@ -4,7 +4,7 @@ author: Marshall Krassenstein
 date: '2021-10-22'
 slug: anki-is-a-gamechanger
 categories: []
-tags: []
+tags: [memory, LIME, learning]
 subtitle: ''
 summary: ''
 authors: []

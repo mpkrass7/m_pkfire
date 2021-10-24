@@ -4,7 +4,7 @@ author: R package build
 date: '2021-01-05'
 slug: hi-hugo
 categories: []
-tags: []
+tags: [lda, xgboost, machine learning, churn, hr]
 subtitle: ''
 summary: ''
 authors: []
