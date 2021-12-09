@@ -2,9 +2,9 @@
 title: Two Way Analytics with Shiny and Postgres SQL
 author: R package build
 date: '2021-09-18'
-slug: hi-hugo
+slug: pokemon-db
 categories: []
-tags: [R, Shiny, Webapp, database, pokemon]
+tags: [R, Shiny, Webapp]
 subtitle: ''
 summary: 'An app I built to show users Persistent Storage in Shiny.'
 authors: [Marshall Krassenstein]

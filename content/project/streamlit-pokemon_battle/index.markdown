@@ -2,7 +2,7 @@
 title: Predicting Pokemon Battles with Streamlit and DataRobot
 author: Marshall Krassenstein
 date: '2021-12-09'
-slug: hi-hugo
+slug: battle-predictor
 categories: []
 tags: [Python, Machine-Learning, Webapp]
 subtitle: ''
