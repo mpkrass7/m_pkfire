@@ -6,7 +6,7 @@ slug: battle-predictor
 categories: []
 tags: [Python, Machine-Learning, Webapp]
 subtitle: ''
-summary: 'An I built that predicts the winner of pokemon battles'
+summary: 'An app I built that predicts the winner of pokemon battles'
 authors: [Marshall Krassenstein]
 lastmod: '2021-12-09'
 featured: no
