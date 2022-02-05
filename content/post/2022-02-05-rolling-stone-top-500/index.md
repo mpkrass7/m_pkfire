@@ -10,7 +10,7 @@ summary: ''
 authors: [Marshall Krassenstein]
 featured: no
 image:
-  caption: ''
+  caption: 'And a small rant about ranking things'
   focal_point: ''
   preview_only: no
 projects: []
