@@ -6,8 +6,8 @@ slug: anki-is-a-gamechanger
 categories: []
 tags: [memory, LIME, learning]
 subtitle: ''
-summary: ''
-authors: [A post about how to 10x your memory]
+summary: 'Anki is an app that helped me 10x my memory'
+authors: []
 lastmod: '2021-10-22T15:36:16-04:00'
 featured: no
 image:
