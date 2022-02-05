@@ -7,7 +7,7 @@ categories: []
 tags: [memory, LIME, learning]
 subtitle: ''
 summary: ''
-authors: []
+authors: [A post about how to 10x your memory]
 lastmod: '2021-10-22T15:36:16-04:00'
 featured: no
 image:

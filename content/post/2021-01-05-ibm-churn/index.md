@@ -6,7 +6,7 @@ slug: hi-hugo
 categories: []
 tags: [lda, xgboost, machine learning, churn, hr]
 subtitle: ''
-summary: ''
+summary: 'Playing with the IBM Churn dataset on my last few days at PNC'
 authors: []
 lastmod: '2021-09-18T13:33:09-04:00'
 featured: no

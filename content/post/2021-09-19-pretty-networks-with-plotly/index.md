@@ -7,7 +7,7 @@ slug: stackoverflow-how-to-color-the-top-20-nodes-over-the-rest-of-the-nodes-in-
 categories: []
 tags: [networkx, python, plotly, geo, networks]
 subtitle: ''
-summary: ''
+summary: 'Paying it forward from people who have helped me solve graph problems to people just getting started'
 authors: []
 lastmod: '2021-09-19T16:15:16-04:00'
 featured: no
