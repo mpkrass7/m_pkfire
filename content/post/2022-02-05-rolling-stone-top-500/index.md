@@ -458,6 +458,6 @@ fig
 
 ![png](./output_27_0.png)
 
-Yup, this is about what I expected to see. Great Success! A lot of analysis can and should be done on this list, but my girlfriend wants me to help her clean up the house and my little brother told me he wanted to build some kind of dashboard with this. So look out for a dashboard I'll embed here soon and feel free to reach out if you want the list of songs!
+Yup, this is about what I expected to see. Great Success! A lot of analysis can and should be done on this list, but my girlfriend wants me to help her clean up the house and my little brother told me he wanted to build some kind of dashboard with this. Thus, onus is not on me to actually do any analysis, and look out for a dashboard I'll embed here soon. Feel free to reach out if you want the list of songs!
 
 
