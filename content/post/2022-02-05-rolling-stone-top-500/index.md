@@ -6,11 +6,11 @@ slug: rolling-stone-top-500
 categories: []
 tags: [python, webscraping, music]
 subtitle: ''
-summary: ''
+summary: 'Webscraping music data with Python and Rambling about work and ranking systems'
 authors: [Marshall Krassenstein]
 featured: no
 image:
-  caption: 'And a small rant about ranking things'
+  caption: ''
   focal_point: ''
   preview_only: no
 projects: []
