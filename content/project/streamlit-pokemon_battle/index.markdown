@@ -4,7 +4,7 @@ author: Marshall Krassenstein
 date: '2021-12-09'
 slug: battle-predictor
 categories: []
-tags: [Python, Machine-Learning, Webapp]
+tags: [python, machine learning, webapp]
 subtitle: ''
 summary: 'An app I built that predicts the winner of pokemon battles'
 authors: [Marshall Krassenstein]

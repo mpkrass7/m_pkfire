@@ -4,7 +4,7 @@ author: R package build
 date: '2021-09-18'
 slug: pokemon-db
 categories: []
-tags: [R, Shiny, Webapp]
+tags: [R, Shiny, Webapp, PCA]
 subtitle: ''
 summary: 'An app I built to show users Persistent Storage in Shiny.'
 authors: [Marshall Krassenstein]

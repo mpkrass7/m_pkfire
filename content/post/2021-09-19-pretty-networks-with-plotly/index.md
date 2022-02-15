@@ -5,7 +5,7 @@ author: Marshall Krassenstein
 date: '2021-09-14'
 slug: stackoverflow-how-to-color-the-top-20-nodes-over-the-rest-of-the-nodes-in-networkx
 categories: []
-tags: [networkx, python, plotly, geo, networks]
+tags: [networkx, python, plotly, networks]
 subtitle: ''
 summary: 'Paying it forward from people who have helped me solve graph problems to people just getting started'
 authors: []

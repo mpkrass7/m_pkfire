@@ -3,8 +3,9 @@ title: Introducing Shmapy
 summary: The fabulous package for building hex maps and facet maps in Python
 tags:
 - Python
-- maps
 - hexmaps
+- package
+- geospatial
 date: "2021-04-20T00:00:00Z"
 
 # Optional external URL for project (replaces project detail page).

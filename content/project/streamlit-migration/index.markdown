@@ -4,7 +4,7 @@ author: Marshall Krassenstein
 date: '2021-09-05'
 slug: streamlit-app
 categories: []
-tags: [Python, Webapp, migration, streamlit]
+tags: [Python, Webapp, migration, streamlit, geospatial]
 subtitle: ''
 summary: 'An app I built to explore migration in the United States'
 authors: []
