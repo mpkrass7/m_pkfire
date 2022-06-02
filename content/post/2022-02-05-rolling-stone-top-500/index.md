@@ -52,7 +52,7 @@ So here's a question: What do top banks, top universities and top songs of all t
 
 ## Motivation
 
-Despite my rant about bad ranking systems, I am as guilty as anyone else about leveraging them. I used US News College Rankings as part of my decision to do my undergrad at Northwestern University, and more related to this post, I have listend extensively over the last few months to a Youtube Music playlist I made from the Rolling Stone Magazine's 2021 Top 500 songs of all time list. 
+Despite my rant about bad ranking systems, I am as guilty as anyone else about leveraging them. I used US News College Rankings as part of my decision to do my undergrad at Northwestern University, and more related to this post, I have listened extensively over the last few months to a Youtube Music playlist I made from the Rolling Stone Magazine's 2021 Top 500 songs of all time list. 
 
 Now to be clear, I in no way endorse these rankings. I find the attempt at ranking music to be about as sensible as an attempt at ranking art or personalities, and I find this particular attempt to be pretty weak methodology-wise. And yet, the list still makes for a great playlist. I've been so into my playlist that I wanted to be more exact when I told people where certain songs ranked in the Rolling Stone top 500 list! 
 
