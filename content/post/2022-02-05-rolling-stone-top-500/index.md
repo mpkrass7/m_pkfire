@@ -76,7 +76,6 @@ from logzero import logger
 import json
 import requests
 from bs4 import BeautifulSoup
-from selenium import webdriver
 
 from IPython.core.interactiveshell import InteractiveShell
 InteractiveShell.ast_node_interactivity = "all"
