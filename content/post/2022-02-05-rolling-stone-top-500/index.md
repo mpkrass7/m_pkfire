@@ -459,3 +459,7 @@ fig
 
 Yup, this is about what I expected to see. Great Success! A lot of analysis can and should be done on this list, but my girlfriend wants me to help her clean up the house and my little brother told me he wanted to build some kind of dashboard with this. Thus, onus is not on me to actually do any analysis, and look out for a dashboard I'll embed here soon. And, if you would like the list of songs to build your own analysis on, you can download it right [here](rolling_stone_top_500_output_final.csv). Let me know if you build anything interesting!
 
+### Update 6/27/22
+
+Someone created a Spotify playlist of the Rolling Stone Top 500. Why might this be important? Because the [Spotify API](https://developer.spotify.com/) is absolutely excellent. First it's incredibly easy to pull data for a given playlist and secondly there is much more full information on available. Stay tuned for more Rolling Stone Top 500 posts ;) 
+Get the new and improved dataset [here](spotify_music_output.csv)
