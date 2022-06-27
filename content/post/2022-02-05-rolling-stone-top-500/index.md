@@ -461,5 +461,6 @@ Yup, this is about what I expected to see. Great Success! A lot of analysis can 
 
 ### Update 6/27/22
 
-Someone created a Spotify playlist of the Rolling Stone Top 500. Why might this be important? Because the [Spotify API](https://developer.spotify.com/) is absolutely excellent. First it's incredibly easy to pull data for a given playlist and secondly there is much more full information on available. Stay tuned for more Rolling Stone Top 500 posts ;) 
-Get the new and improved dataset [here](spotify_music_output.csv)
+Someone created a Spotify playlist of the Rolling Stone Top 500. Why might this be important? Because the [Spotify API](https://developer.spotify.com/) is absolutely excellent. First it's incredibly easy to pull data for a given playlist and secondly there is much more full information available. Stay tuned for more Rolling Stone Top 500 posts ;) 
+
+Get the new and improved dataset [here](spotify_music_output.csv).
