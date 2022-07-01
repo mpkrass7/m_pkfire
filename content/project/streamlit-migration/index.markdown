@@ -35,4 +35,4 @@ Play with US migration app below or view it  [here](https://share.streamlit.io/m
 
 Streamlit makes building simple web apps really easy. Check it out [here](https://streamlit.io/).
 
-Feel free to [repo](https://github.com/mpkrass7/solid-octo-robot) if you want an example to make your own!
+Feel free to clone the [repo](https://github.com/mpkrass7/solid-octo-robot) if you want an example to make your own!
