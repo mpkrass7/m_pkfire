@@ -16,7 +16,6 @@ image:
 projects: []
 ---
 
-# Nested Cross Validation is an Important Thing
 
 In this tutorial I will provide an explanation of what nested cross validation is, why you should do it, and how to implement in Scikit Learn. 
 
@@ -104,7 +103,7 @@ The splits for nested cross validation are shown visually in the diagram below. 
 ![nested_cv](images/illustrate_nested_cv.jpeg)
 
 
-### Implementing Nested CV
+## Implementing Nested CV
 
 Now from what I explained above, we could infer that running nested cv involves a nested `for` loop. The outer loop would run *i* times where *i* represents the number of folds in our outer cv. The inner loop would run *j* times where *j* represents the number of folds run on the inner cv. So the total number of models trained in this nested loop will be $i * j$. In practice we actually don't even need to write this unless we want more control over the output because the scikit-learn library has functions built in to help us. 
 
@@ -359,4 +358,9 @@ plot_experiment(outer_scores, nested_scores, outpath="images/experiment_results.
 Cross validation is standard practice in Machine Learning yet most organizations that do this create overly optimistic models. Among other reasons, this contributes to a frequently seen issue where models underperform in production compared to their performance in the building phase. On its own, nested Cross Validation does not provide us with a better model. And as we saw above, the computational cost of using Nested CV can be high, especially with many hyper parameters and estimators. In exchange for time and compute power, it does allow us to properly and iteratively evaluate our models to produce realistic estimates of performance without using our holdout set. 
 
 
+## References
+KDNuggets https://www.kdnuggets.com/2020/10/nested-cross-validation-python.html
+AnalyticsVidhya: https://www.analyticsvidhya.com/blog/2021/03/a-step-by-step-guide-to-nested-cross-validation/
+Arxiv: https://arxiv.org/abs/1809.09446
 
+Credits to Kevin Arvai and Justin Swansberg for auditing my understanding of this topic
