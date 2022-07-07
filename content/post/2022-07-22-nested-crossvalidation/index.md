@@ -4,9 +4,9 @@ author: Marshall Krassenstein
 date: '2022-07-07'
 slug: nested-cross-validation
 categories: []
-tags: [python, machine-learning, partitioning]
+tags: [python, partitioning, machine-learning]
 subtitle: ''
-summary: "An explanation of what nested cross validation is, why it's important, and how to implement it in Python"
+summary: 'A tutorial on what nested cross validation is, why it is important and how to implement it in Python'
 authors: [Marshall Krassenstein]
 featured: yes
 image:
@@ -31,11 +31,11 @@ If your job title has the phrase 'Data Science' or 'Machine Learning' in it, you
 
 ![train and holdout set](images/train_holdout.png)
 
-Now if this article is for you, then you probably also realize that you need more than just a training and a holdout set if you want to evaluate multiple models or if you want to tune hyper parameters. Ideally, we need one more dataset that will help us choose the best tool for the problem, which we can then pass to the holdout set to evaluate that best model. We call this 'choose your model and hyper parameter space' set the **validation set**. And that might look like this:
+Now if this article is for you, then you probably also realize that you need more than just a training and a holdout set if you want to evaluate multiple models or if you want to tune hyper-parameters. Ideally, we need one more dataset that will help us choose the best tool for the problem, which we can then pass to the holdout set to evaluate that tool. We call this 'choose your model and hyper-parameter space' set the **validation set**. And that might look like this:
 
 ![train validate and holout set](images/train_validate_holout.jpeg)
 
-Now before we go on, please do pay attention to the above claim and make sure you understand why you can't use your holdout set both for choosing between hyperparameter options **and** for evaluating the chosen model. I will return to this idea, because it is the most important piece to understanding why nested cross validation is so important. 
+Now before we go on, please do pay attention to the above claim and make sure you understand why you can't use your holdout set both for choosing between hyper-parameter options **and** for evaluating the chosen model. I will return to this idea, because it is the most important piece to understanding why nested cross validation is so important. 
 
 But first I want to talk through one more point. Now, continuing the hypothesis that you are the intended audience of this article, I will further surmise that you are also familiar with cross-validation, the magical and commonly used data slicing strategy that lets you turn your training data into a debiased validation set. Effectively, you take your training dataset cut it into *n* equally sized pieces, fit a model using all of the data in *n-1* pieces, then evalute on the remaining piece. You repeat this process until each piece has been used as the single evaluating dataset. Cross validation looks like this:
 
@@ -49,19 +49,19 @@ So, cross validation is great. The only real downside to cross validation is tha
 
 ### So what's the Problem?
 
-Up to this point, we've defined our train, validation, and holdout sets. We even talked about a nifty algorithm for merging the training and validation sets so that we can both fit our model and select its hyperparameters using the same set of data. You might wonder, "Maybe there's some secret mathematical issue with Cross Validation?" But the issue is not with cross validation at all. In fact, if you truly do just use cross validation to train and select your model, leaving evaluation to your holdout set, then there actually isn't anything wrong with the above process. 
+Up to this point, we've defined our train, validation, and holdout sets. We even talked about a nifty algorithm for merging the training and validation sets so that we can both fit our model and select its hyper-parameters using the same set of data. You might wonder, "Maybe there's some secret mathematical issue with Cross Validation?" But the issue is not with cross validation at all. In fact, if you truly do just use cross validation to train and select your model, leaving evaluation to your holdout set, then there actually isn't anything wrong with the above process. 
 
 The problem is that most of the time we do not actually follow this process. To explain why most people don't do this and why that presents us with a problem, I will leave off cross validation for now and return to a regular train, validate, holdout partitioning scheme.
 
 ### Introducing Leakage
 
-Let's say I want to train a Random Forest classifier on a dataset. I'm not sure how deep the trees should be, and I'm not sure how many trees to use. Being the classy practitioner I am, I decide to define a grid of hyper parameters, maybe with tree depths of 3, 5 and 10 and a number of trees of 30, 100, and 200. That grid might look like this:
+Let's say I want to train a Random Forest classifier on a dataset. I'm not sure how deep the trees should be, and I'm not sure how many trees to use. Being the classy practitioner I am, I decide to define a grid of hyper-parameters, maybe with tree depths of 3, 5 and 10 and a number of trees of 30, 100, and 200. That grid might look like this:
 
 ![trees](images/grid_search.jpg)
 
-Since I have my validation set, I can train a model on each of these trees, and then find the best hyper parameter space by choosing the best performing model. Maybe a tree depth and number of trees combination of 5 and 200 is the best performer. If I want to know how well it performed, I can assess my (5,200) random forest on whatever metrics interest me using the holdout dataset.  So far, so good. Except, wait, my performance on the holdout set really is not *that* much better than some of the other models. In fact, it seems like if I only trained a model with 100 trees, I could cut the time it takes to train in half with a minimal loss in performance. Maybe evaluating that model on the holdout set will even perform *better* when I look at some other metrics of evaluation than what I had originally considered. And actually, I didnt' test some other hyper parameters. A model using 70 trees could perform just as well as one with 100 trees. Oh, modeling is such an *iterative process*.
+Since I have my validation set, I can train a model on each of these trees, and then find the best hyper-parameter space by choosing the best performing model. Maybe a tree depth and number of trees combination of 5 and 200 is the best performer. If I want to know how well it performed, I can assess my (5,200) random forest on whatever metrics interest me using the holdout dataset.  So far, so good. Except, wait, my performance on the holdout set really is not *that* much better than some of the other models. In fact, it seems like if I only trained a model with 100 trees, I could cut the time it takes to train in half with a minimal loss in performance. Maybe evaluating that model on the holdout set will even perform *better* when I look at some other metrics of evaluation than what I had originally considered. And actually, I didnt' test some other hyper-parameters. A model using 70 trees could perform just as well as one with 100 trees. Oh, modeling is such an *iterative process*.
 
-So, I could restart the modeling process with a new hyper parameter space. And then I can keep following this process until I have a model with satisfactory performance on the holdout set. But there's a problem here. If I keep redoing my models until my holdout score is adequate, I'm essentially just gaming the model fitting process because some configuration of the model is destined to perform better than others on *this sample of data*. Another phrase for this might be that I'm indirectly introducing **leakage** to my training data by incorporating my knowledge of performance on the holdout set to the modeling process. At the end of the day, I should not use the holdout set iteratively. It is meant to be evaluated at the latest stage of the modeling process.
+So, I could restart the modeling process with a new hyper-parameter space. And then I can keep following this process until I have a model with satisfactory performance on the holdout set. But there's a problem here. If I keep redoing my models until my holdout score is adequate, I'm essentially just gaming the model fitting process because some configuration of the model is destined to perform better than others on *this sample of data*. Another phrase for this might be that I'm indirectly introducing **leakage** to my training data by incorporating my knowledge of performance on the holdout set to the modeling process. At the end of the day, I should not use the holdout set iteratively. It is meant to be evaluated at the latest stage of the modeling process.
 
 ### Validating on the validation set
 
@@ -77,9 +77,9 @@ Obviously, this was a bit of a silly hypothesis. But what I hope it illustrates 
 
 ### Enter Nested CV
 
-Cross validation suffers from exactly the same problem as making a validation split. If it is used to decide between model hyper parameters, it shouldn't also be used to evaluate the winning model. This is exactly what you can read in the [Scikit-Learn documentaiton](https://scikit-learn.org/stable/auto_examples/model_selection/plot_nested_cross_validation_iris.html), which also explains what Nested Cross validation is for:
+Cross validation suffers from exactly the same problem as making a validation split. If it is used to decide between model hyper-parameters, it shouldn't also be used to evaluate the winning model. This is exactly what you can read in the [Scikit-Learn documentaiton](https://scikit-learn.org/stable/auto_examples/model_selection/plot_nested_cross_validation_iris.html), which also explains what Nested Cross validation is for:
 
-*"..Choosing the parameters that maximize non-nested CV biases the model to the dataset, yielding an overly-optimistic score... Nested cross-validation (CV) is often used to train a model in which hyperparameters also need to be optimized. Nested CV estimates the generalization error of the underlying model and its (hyper)parameter search."*
+*"..Choosing the parameters that maximize non-nested CV biases the model to the dataset, yielding an overly-optimistic score... Nested cross-validation (CV) is often used to train a model in which hyper-parameters also need to be optimized. Nested CV estimates the generalization error of the underlying model and its (hyper)parameter search."*
 
 #### How Nested CV works
 
@@ -92,22 +92,22 @@ So basically, what's happening is a process like this:
 - Use cross validation on your remaining dataset.
 - For each iteration:
     - Consider the validation fold as your holdout set. This is our *outer cross validation* and its results will be used to evaluate the performance of the model obtained from our next step.
-    - In the remaining dataset, perform cross validation again. This inner loop of cross validtaion will be used to determine a set of hyper parameters.
-    - When the optimal hyper parameters are found, retrain your model on all of the data in this inner fold and evaluate this model on your outer cv validation set
+    - In the remaining dataset, perform cross validation again. This inner loop of cross validtaion will be used to determine a set of hyper-parameters.
+    - When the optimal hyper-parameters are found, retrain your model on all of the data in this inner fold and evaluate this model on your outer cv validation set
 - From this we end up with a debiased version of the same evaluation produced by Cross Validation. 
 
-We can take our results from the above process and use them to compute whatever evaluation metrics we'd like with knowledge that they are unbiased despite us not actually creating a new dataset. We also have up to *i* different sets of hyperparameters we can use for our final model. In most implementations our final model is the one trained using the first optimal set of hyper parameters found.
+We can take our results from the above process and use them to compute whatever evaluation metrics we'd like with knowledge that they are unbiased despite us not actually creating a new dataset. We also have up to *i* different sets of hyper-parameters we can use for our final model. In most implementations our final model is the one trained using the first optimal set of hyper-parameters found.
 
-The splits for nested cross validation are shown visually in the diagram below. If we have a 5 fold inner cv and a 5 fold outer cv, we will build 25 models * the number of hyper parameter combinations we check in this process:
+The splits for nested cross validation are shown visually in the diagram below. If we have a 5 fold inner cv and a 5 fold outer cv, we will build 25 models * the number of hyper-parameter combinations we check in this process:
 
 ![nested_cv](images/illustrate_nested_cv.jpeg)
 
 
-## Implementing Nested CV
+### Implementing Nested CV
 
 Now from what I explained above, we could infer that running nested cv involves a nested `for` loop. The outer loop would run *i* times where *i* represents the number of folds in our outer cv. The inner loop would run *j* times where *j* represents the number of folds run on the inner cv. So the total number of models trained in this nested loop will be $i * j$. In practice we actually don't even need to write this unless we want more control over the output because the scikit-learn library has functions built in to help us. 
 
-The scikit-learn library makes implememnting Nested CV very easy. Essentially, we just specify how many folds we want for our inner and outer cross validation paritioning schemes. Then, we pass the inner specification to `GridSearchCV` and the outer specification to `cross_val_score`. The result will be an estimator fitted with optimal hyper parameters and a debiased cross validation score derived from evaluating our hyper-parameters on the outer folds of our dataset. 
+The scikit-learn library makes implememnting Nested CV very easy. Essentially, we just specify how many folds we want for our inner and outer cross validation paritioning schemes. Then, we pass the inner specification to `GridSearchCV` and the outer specification to `cross_val_score`. The result will be an estimator fitted with optimal hyper-parameters and a debiased cross validation score derived from evaluating our hyper-parameters on the outer folds of our dataset. 
 
 To show this, I'll use the [wine quality dataset](https://archive.ics.uci.edu/ml/datasets/wine+quality) found inthe UCI Machine Leanring Repository. In my implementation below, I actually do use one loop, but the reason I'm doing this is to run nested cross validation in 10 experiments. This will let us more clearly see a difference between using nesting and not using nesting. The only issue is that we are essentially training 10 (rounds) * 4 (outer cv folds) * 5 (inner cv folds) * 6 (number of parameter combinations) = 1200 models!
 
@@ -260,7 +260,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=SEED, str
 
 
 ```python
-#Define the hyperparameter grid
+#Define the hyper-parameter grid
 param_grid = {'max_depth': [10, 50],
                 'n_estimators': [100, 200, 400]}
 
@@ -281,14 +281,14 @@ for i in range(ROUNDS):
     # Run on each of the 4 outer folds
     outer_cv = StratifiedKFold(n_splits=4, shuffle=True, random_state=i)
     
-    # Run grid search to tune hyper parameters (Note that this just runs on the inner cv)
+    # Run grid search to tune hyper-parameters (Note that this just runs on the inner cv)
     estimator = GridSearchCV(rf, param_grid=param_grid, cv=inner_cv, n_jobs=-1, scoring='neg_log_loss') 
     estimator.fit(X_train, y_train)
     
     # Append results of inner CV to outer score
     outer_scores[i] = estimator.best_score_
 
-    # Now that we theoretically have our hyperparameters set, we use the outer cv to actually score the model 
+    # Now that we theoretically have our hyper-parameters set, we use the outer cv to actually score the model 
     nested_score = cross_val_score(estimator, X=X_train, y=y_train, cv=outer_cv, n_jobs=-1, scoring='neg_log_loss') 
     
     # Append results of round to nested scores
@@ -349,18 +349,19 @@ def plot_experiment(outer_scores, nested_scores, outpath=None):
 plot_experiment(outer_scores, nested_scores, outpath="images/experiment_results.png")
 ```
 
+
     
-![png](./images/experiment_results.png)
-    
+![png](images/index_15_0.png)
+
 
 ### Concluding
 
-Cross validation is standard practice in Machine Learning yet most organizations that do this create overly optimistic models. Among other reasons, this contributes to a frequently seen issue where models underperform in production compared to their performance in the building phase. On its own, nested Cross Validation does not provide us with a better model. And as we saw above, the computational cost of using Nested CV can be high, especially with many hyper parameters and estimators. In exchange for time and compute power, it does allow us to properly and iteratively evaluate our models to produce realistic estimates of performance without using our holdout set. 
+Cross validation is standard practice in Machine Learning yet most organizations that do this create overly optimistic models. Among other reasons, this contributes to a frequently seen issue where models underperform in production compared to their performance in the building phase. On its own, nested Cross Validation does not provide us with a better model. And as we saw above, the computational cost of using Nested CV can be high, especially with many hyper-parameters and estimators. In exchange for time and compute power, it does allow us to properly and iteratively evaluate our models to produce realistic estimates of performance without using our holdout set. 
 
 
 ## References
-KDNuggets https://www.kdnuggets.com/2020/10/nested-cross-validation-python.html
-AnalyticsVidhya: https://www.analyticsvidhya.com/blog/2021/03/a-step-by-step-guide-to-nested-cross-validation/
-Arxiv: https://arxiv.org/abs/1809.09446
+- KDNuggets https://www.kdnuggets.com/2020/10/nested-cross-validation-python.html
+- AnalyticsVidhya: https://www.analyticsvidhya.com/blog/2021/03/a-step-by-step-guide-to-nested-cross-validation/
+- Arxiv: https://arxiv.org/abs/1809.09446
 
 Credits to Kevin Arvai and Justin Swansberg for auditing my understanding of this topic
