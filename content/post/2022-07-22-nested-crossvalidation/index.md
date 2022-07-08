@@ -1,5 +1,5 @@
 ---
-title: "Nested cross validation is an Important Thing"
+title: "Nested Cross Validation is an Important Thing"
 author: Marshall Krassenstein
 date: '2022-07-07'
 slug: nested-cross validation
