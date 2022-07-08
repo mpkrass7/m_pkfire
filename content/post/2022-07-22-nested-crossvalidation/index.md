@@ -16,7 +16,7 @@ image:
 projects: []
 ---
 
- Nested cross validation is cross validation methodlogy that can provide better estimates of model performance on held out data. In this tutorial I will provide an explanation of what nested cross validation is, why you should use it, and how to implement in scikit-learn. 
+ Nested cross validation is a cross validation methodology that can provide better estimates of model performance on held out data. In this tutorial I will provide an explanation of what nested cross validation is, why you should use it, and how to implement it in scikit-learn. 
 
 ### Prerequisites
 
@@ -45,7 +45,7 @@ Using cross validation gives you two big advantages compared to using a train/va
 1. All of the data that is not in your holdout set is used for model training. 
 2. All of the data that is not in your holdout set is used for model validation.
 
-So, cross validation is great. It gives you more training data and more data to determine the best model among a set of models. The only real downside to cross validation is that doing it requires you to fit a model once for every **fold**, or the number of times you want to split your data. So, if you use five fold cross validations, you could expect about 5x more time needed to fit your model.
+So, cross validation is great. It gives you more training data and more data to determine the best model among a set of models. The only real downside to cross validation is that doing it requires you to fit a model once for every **fold**, or the number of times you want to split your data. So, if you use five-fold cross validation, you could expect about 5x more time needed to fit your model.
 
 
 ### So what's the Problem?
@@ -380,6 +380,7 @@ plot_experiment(outer_scores, nested_scores, outpath="images/experiment_results.
 ```
 
 
+    
 ![png](images/experiment_results.png)
     
 
