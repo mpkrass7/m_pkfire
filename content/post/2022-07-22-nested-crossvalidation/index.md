@@ -117,23 +117,29 @@ To show this, I'll use the [wine quality dataset](https://archive.ics.uci.edu/ml
 
 
 ```python
-#Load libraries
+# Load libraries
 from logzero import logger
 import numpy as np
 import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import cross_val_score, GridSearchCV, StratifiedKFold, train_test_split
+from sklearn.model_selection import (
+    cross_val_score,
+    GridSearchCV,
+    StratifiedKFold,
+    train_test_split,
+)
 
 import matplotlib.pyplot as plt
 import warnings
+
 warnings.filterwarnings("ignore")
 
 SEED = 42
 ROUNDS = 10
-TARGET = 'quality'
+TARGET = "quality"
 
-#Load data
-data = pd.read_csv('data/winequality-red.csv')
+# Load data
+data = pd.read_csv("data/winequality-red.csv")
 data.head()
 ```
 
@@ -258,49 +264,57 @@ data.head()
 ```python
 # Split data
 X, y = data.drop(TARGET, axis=1), data[TARGET]
-X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=SEED, stratify = y)
+X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=SEED, stratify=y)
 ```
 
 In the code block below, I use the `GridSearchCV` function to find the optimal hyperparameters for the model. `GridSearchCV` implements traditional non-nested cross validation. In each fold it fits a model with all of the sets of hyperparameters.  When it finishes running it finds the model with the highest average score across all of the folds. When I run `estimator.best_score_`, I am returning the score from the best model. Because this score was also used to select the optimal hyperparameters, it is biased. When I run `cross_val_score` on that same model, I am essentially evaluating the model performance on a synthetic holdout dataset that produced a debiased score.
 
 
 ```python
-#Define the hyperparameter grid
-param_grid = {'max_depth': [10, 50],
-                'n_estimators': [100, 200, 400]}
+# Define the hyperparameter grid
+param_grid = {"max_depth": [10, 50], "n_estimators": [100, 200, 400]}
 
 # Define our model
 rf = RandomForestClassifier(random_state=SEED)
 
-#Create arrays to store the scores
-#Outer_scores reflect traditional cross validation
+# Create arrays to store the scores
+# Outer_scores reflect traditional cross validation
 outer_scores = np.zeros(ROUNDS)
 nested_scores = np.zeros(ROUNDS)
 
 
 # Loop for each round
 for i in range(ROUNDS):
-    logger.info(f"Testing nested against non nested cross validation for model evaluation round {i + 1}...")
-   
+    logger.info(
+        f"Testing nested against non nested cross validation for model evaluation round {i + 1}..."
+    )
+
     # 5 fold cross validation...
     inner_cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=i)
     # Run on each of the 4 outer folds
     outer_cv = StratifiedKFold(n_splits=4, shuffle=True, random_state=i)
-    
+
     # Run grid search to tune hyperparameters (Note that this just runs on the inner cv)
-    estimator = GridSearchCV(rf, param_grid=param_grid, cv=inner_cv, n_jobs=-1, refit=True, scoring='neg_log_loss') 
+    estimator = GridSearchCV(
+        rf,
+        param_grid=param_grid,
+        cv=inner_cv,
+        n_jobs=-1,
+        refit=True,
+        scoring="neg_log_loss",
+    )
     estimator.fit(X_train, y_train)
-    
+
     # Append results of inner CV to outer score
     outer_scores[i] = estimator.best_score_
 
-    # Now that we theoretically have our hyperparameters set, we use the outer cv to actually score the model 
-    nested_score = cross_val_score(estimator, X=X_train, y=y_train, cv=outer_cv, n_jobs=-1, scoring='neg_log_loss') 
-    
+    # Now that we theoretically have our hyperparameters set, we use the outer cv to actually score the model
+    nested_score = cross_val_score(
+        estimator, X=X_train, y=y_train, cv=outer_cv, n_jobs=-1, scoring="neg_log_loss"
+    )
+
     # Append results of round to nested scores
     nested_scores[i] = nested_score.mean()
-
-
 ```
 
     [I 220708 10:20:53 1975274864:16] Testing nested against non nested cross validation for model evaluation round 1...
@@ -319,11 +333,14 @@ Now let's look at the difference between our scores using nested and non nested 
 
 
 ```python
-#Take the difference from the non-nested and nested scores
+# Take the difference from the non-nested and nested scores
 score_difference = outer_scores - nested_scores
 
-print("Avg. difference of {:6f} with std. dev. of {:6f}."
-      .format(score_difference.mean(), score_difference.std()))
+print(
+    "Avg. difference of {:6f} with std. dev. of {:6f}.".format(
+        score_difference.mean(), score_difference.std()
+    )
+)
 ```
 
     Avg. difference of 0.033996 with std. dev. of 0.016649.
@@ -333,10 +350,10 @@ print("Avg. difference of {:6f} with std. dev. of {:6f}."
 ```python
 def plot_experiment(outer_scores, nested_scores, outpath=None):
     # Plot scores on each round for nested and non-nested cross validation
-    fig, ax = plt.subplots(figsize=(16,8))
+    fig, ax = plt.subplots(figsize=(16, 8))
     fig.tight_layout()
-    outer_scores_line, = ax.plot(np.abs(outer_scores), linewidth = 4, color='orange')
-    nested_line, = ax.plot(np.abs(nested_scores), linewidth=4, color='steelblue')
+    (outer_scores_line,) = ax.plot(np.abs(outer_scores), linewidth=4, color="orange")
+    (nested_line,) = ax.plot(np.abs(nested_scores), linewidth=4, color="steelblue")
 
     ax.tick_params(axis="both", which="both", length=0, labelsize=20)
     ax.grid(False)
@@ -344,13 +361,20 @@ def plot_experiment(outer_scores, nested_scores, outpath=None):
     ax.set_ylabel("Score", fontsize="20")
     ax.set_xlabel("Experiment Number", fontsize="20")
 
-    plt.legend([outer_scores_line, nested_line],
-              ["Non-Nested CV", "Nested CV"],
-               prop={'size': 22})
-    plt.title("Non Nested vs Nested Cross Validation on the Wine Dataset",
-             x=.5, y=1, fontsize="24")
+    plt.legend(
+        [outer_scores_line, nested_line],
+        ["Non-Nested CV", "Nested CV"],
+        prop={"size": 22},
+    )
+    plt.title(
+        "Non Nested vs Nested Cross Validation on the Wine Dataset",
+        x=0.5,
+        y=1,
+        fontsize="24",
+    )
     if outpath:
-        plt.savefig(outpath, bbox_inches='tight')
+        plt.savefig(outpath, bbox_inches="tight")
+
 
 plot_experiment(outer_scores, nested_scores, outpath="images/experiment_results.png")
 ```
