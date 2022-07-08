@@ -394,7 +394,7 @@ If you are interested in learning more or talking to me about this subject, feel
 
 ## References
 - KDNuggets https://www.kdnuggets.com/2020/10/nested-cross validation-python.html
-- AnalyticsVidhya: https://www.analyticsvidhya.com/blog/2021/03/a-step-by-step-guide-to-nested-cross validation/
+- AnalyticsVidhya: https://www.analyticsvidhya.com/blog/2021/03/a-step-by-step-guide-to-nested-cross-validation/
 - Arxiv: https://arxiv.org/abs/1809.09446
 
 Credits to Kevin Arvai and Justin Swansberg for auditing my understanding of this topic.
