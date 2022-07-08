@@ -1,8 +1,6 @@
 # Marshall Krassenstein's Website Readme File
 
-A collection of markdown documents brought together to make an R Markdown website
-
-This repo is where I house my files for my personal website. Building this was amazingly easy.
+A collection of markdown documents brought together to make an R Markdown website.
 
 ## See the website here:
 https://www.marshallpk.com/
