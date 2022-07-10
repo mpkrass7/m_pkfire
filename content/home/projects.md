@@ -30,11 +30,13 @@ content:
   - name: R
     tag: R
   - name: Python
-    tag: Python
+    tag: python
   - name: Tableau
     tag: Tableau
   - name: Webapp
-    tag: Webapp
+    tag: webapp
+  - name: Machine Learning
+    tag: machine-learning
 
 design:
   # Choose how many columns the section has. Valid values: '1' or '2'.

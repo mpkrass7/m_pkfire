@@ -20,9 +20,9 @@ organizations:
   url: https://www.datarobot.com/
 role: Data Scientist
 social:
-- icon: envelope
-  icon_pack: fas
-  link: /#contact
+# - icon: envelope
+#   icon_pack: fas
+#   link: /#contact
 - display:
     header: true
 # - icon: twitter
