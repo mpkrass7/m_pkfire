@@ -1619,9 +1619,9 @@ Welp, it's a mess but it's my mess. There are a few conclusions I can draw from 
 - Be careful with your clustering methodology. As we see from the chart above, the cluster assignments created from running DBSCAN on one set of parameters are not great.
 - Unsupervised learning can be a great way to find patterns in high dimensional data but it can also be like reading signs from chicken scratch. We can drastically impact cluster assignments and embeddings by varying features to include as well as parameters for UMAP and DBSCAN.
 
-Of course, this wouldn't be complete if I did not allow you as a reader to play around with this data yourself. As with many other projects I've played around with, I built an accompanying Streamlit application to further explore my data and play around with cluster assignments. Try it out [here](https://mpkrass7-redesigned-octo-disco-streamlit-bigger-appapp-bd2mgm.streamlitapp.com/). You can also download the dataset [here](data/spotify_music_output.csv) for your own use.
+Of course, this wouldn't be complete if I did not allow you as a reader to play around with this data yourself. As with many other projects I've undertaken, I built an accompanying Streamlit application for further exploration on UMAP and DBSCAN. Try it out [here](https://mpkrass7-redesigned-octo-disco-streamlit-bigger-appapp-bd2mgm.streamlitapp.com/). You can also download the dataset [here](data/spotify_music_output.csv) for your own use.
 
-If you are interested in learning more or talking to me about this subject, feel free to look me up on [Github](https://github.com/mpkrass7) or add me on [Linkedin](https://www.linkedin.com/in/marshall-krassenstein/)! The greatest reward I have from doing any of this is hearing from people who took something away from my post.
+If you are interested in learning more or talking to me about this subject (especially about ranking music), feel free to look me up on [Github](https://github.com/mpkrass7) or add me on [Linkedin](https://www.linkedin.com/in/marshall-krassenstein/)! The greatest reward I have from doing any of this is hearing from people who took something away from my post.
 
 
 
@@ -1632,5 +1632,3 @@ If you are interested in learning more or talking to me about this subject, feel
 - 500 Best Songs of All Time - Rolling Stone. https://www.rollingstone.com/music/music-lists/best-songs-of-all-time-1224767/. Accessed 9 July 2022.
 
 None of this has anything to do with DataRobot, the company I work at. Nonetheless, I thank all of my coworkers who came to that one deep dive session on Streamlit I did a couple weeks ago because it inspired me to build my app and make this post.  
-
-
