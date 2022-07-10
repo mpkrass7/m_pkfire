@@ -16,11 +16,11 @@ image:
 projects: []
 ---
 
-In a previous post, I ranted about ranking systems and webscraped data on a fascinating list - Rolling Stone Magazine's Top 500 Greatest Songs of All Time. In this post, I pull the data again using the Spotify API and perform more in depth analytics on it including supervised learning, dimensionality reduction, and unsupervised learning. I also use Streamlit to make a web app that allows you to explore the data and see the results in a more interactive way.
+In a previous post, I ranted about ranking systems and webscraped data on a fascinating list - Rolling Stone Magazine's Top 500 Greatest Songs of All Time. In this post, I pull the data again using the Spotify API and perform more in depth analytics on it including supervised learning, dimensionality reduction, and unsupervised learning. I also use Streamlit to make a web application that allows you to explore the data and see the results in a more interactive way.
 
 ## Background
 
-Released in September 2021, Rolling Stone attempted to rank what maybe shouldn't be ranked. Across all genres over the last 100 years, they ranked from 1 to 500 what they considered to be the best songs of all time. It was the first time they made a list like this in 17 years. In constructing the list, they surveyed a bunch of artists and music critics about their 50 favorite songs and used the results to build out the list. Possibly because of who they surveyed and possibly because of how they scored the survey results, the emerging list makes the listener stop and think, "Really? Gasolina by Daddy Yankee is in the top 50?". Yet for all of its spicy takes, it makes for an excellent ~34 hour playlist, and I've been obsessed with it for nearly the past year.
+Released in September 2021, Rolling Stone attempted to rank what maybe shouldn't be ranked. Across all genres over the last 100 years, they ordered from 1 to 500 what they considered to be the best songs of all time. It was the first time they made a list like this in 17 years. In constructing the list, they surveyed a bunch of artists and music critics about their 50 favorite songs and aggregated the results to create their ranking. Possibly because of who they surveyed and possibly because of how they scored the survey results, the emerging list makes the listener stop and think, "Really? Gasolina by Daddy Yankee is in the top 50?". Yet for all of its spicy takes, it makes for an excellent ~34 hour playlist, and I've been obsessed with it for almost a year.
 
 You can read more about how they came up with this list on their [website](https://www.rollingstone.com/music/music-lists/best-songs-of-all-time-1224767/), but I site it below for reference:
 
@@ -30,11 +30,11 @@ You can read more about how they came up with this list on their [website](https
 
 ### Why I scraped data from the Rolling Stone Top 500.. Twice
 
-In my last post I described how and why I scraped data from the Rolling Stone top 500. In my own words, "I’ve been so into my playlist that I wanted to be more exact when I told people where certain songs ranked in the Rolling Stone top 500 list!". My methodology was to use the `BeautifulSoup` library to scrape the songs off of the website and then merge in other information like genre and track time using the now deprecated iTunes API. The result had a few misses in some information but overall was pretty thorough.
+In my last post I described how and why I scraped data from the Rolling Stone top 500. In my own words, "I’ve been so into my playlist that I wanted to be more exact when I told people where certain songs ranked in the Rolling Stone top 500 list". My methodology was to use the `BeautifulSoup` library to scrape the songs off of the website and then merge in other information like genre and track time using the now deprecated iTunes API. The result had a few misses in some information but overall was pretty thorough.
 
-So I pulled this dataset and I sent it to my little brother to run some kind of analysis on. After waiting a few months, I saw that someone else made the same playlist on Spotify that I had made in Youtube Music. For me this was a game changer, because Spotify API is free to use and returns high quality results. Besides filling in some missing records I had from linking my webscraping to the Itunes API, it also provided a bunch of quantitative metrics for evaluating and comparing music, such as the danceability and liveness of a given song.
+So I pulled this dataset and I sent it to my little brother to run some kind of analysis on. After waiting a few months, I saw that someone else made the same playlist on Spotify that I had made in Youtube Music. For me this was a game changer, because Spotify API is free to use and returns high quality results. Besides filling in some missing records I had from linking my webscraping to the iTunes API, it also provided a bunch of quantitative metrics for evaluating and comparing music, such as the danceability and liveness of a given song.
 
-Below, I show just how easy this was to do. In a few lines I pull more data than I ever had before on all of the songs in the top 500 list as well as metadata about the corresponding artist and albums.
+Below, I show just how easy this was to do. In a few lines I pull more data than I ever had before on all of the songs in the top 500 list as well as metadata about the corresponding artists and albums.
 
 ## Pulling Data
 
@@ -246,39 +246,13 @@ df = (
     .assign(album_release_year = lambda x: x.album_release_date.dt.year)
 )
 # Check for null values
-df.isnull().sum()
+df.isna().any().sum()
 ```
 
 
 
 
-    rank                      0
-    artist_name               0
-    track_name                0
-    track_popularity          0
-    track_duration_ms         0
-    track_is_explicit         0
-    track_number              0
-    track_danceability        0
-    track_energy              0
-    track_key                 0
-    track_loudness            0
-    track_mode                0
-    track_speechiness         0
-    track_acousticness        0
-    track_instrumentalness    0
-    track_liveness            0
-    track_valence             0
-    track_tempo               0
-    track_time_signature      0
-    track_analysis_url        0
-    album_name                0
-    album_release_date        0
-    album_release_year        0
-    album_image               0
-    artist_genre              0
-    artist_popularity         0
-    dtype: int64
+    0
 
 
 
@@ -633,9 +607,9 @@ df.to_csv('data/spotify_music_output.csv',index=False)
 
 
 
-### The Measures We Have
+## The Measures We Have
 
-In less than two minutes, we have complete data on all 500 songs in the list! I'm almost upset with how easy this was compared with scraping the data from Rolling Stone Magazine. Great job Spotify. Still, we might wonder why I bothered to gather this info given I already did it before even if its cleaner and faster. But as I said above, the other reason I went through the trouble to pull this was for the beautiful quantitative measures we can get for each song on the list. I'll show why these are so useful for my purposes in a little bit. As an example of what we have, below I show some new measures we have for stronger. 
+In less than two minutes, we have complete data on all 500 songs in the list! I'm almost upset with how easy this was compared with scraping the data from Rolling Stone Magazine. Great job Spotify. Still, we might wonder why I bothered to gather this info given I already did it before even if it is cleaner and more reliable. But as I said above, the other reason I went through the trouble to pull this was for the beautiful quantitative measures we can get for each song on the list. I'll show why these are so useful for my purposes in a little bit. As an example of what we have, below I show some new measures we have for stronger. 
 
 
 ```python
@@ -669,8 +643,6 @@ sp.audio_features(track_uris[0])[0]
 Some explanation of what some of these metrics is worthwhile. I pulled these definitions straight from the spotify documentation
 
 - acousticness: A confidence measure from 0.0 to 1.0 of whether the track is acoustic. 1.0 represents high confidence the track is acoustic. 
-
-- analysis_url: A URL to access the full audio analysis of this track. An access token is required to access this data.
 
 - danceability: Danceability describes how suitable a track is for dancing based on a combination of musical elements including tempo, rhythm stability, beat strength, and overall regularity. A value of 0.0 is least danceable and 1.0 is most danceable.
 
@@ -986,7 +958,7 @@ artist_df
 
 
 
-Woww this definitely tracks. Props to Harry Styles and X-Ray Spex for lining up their artist popularity generally with their song popularity. Now I'll make the same plot I built above at the artist level. It turns out Kanye West and Kendrick Lamar are the two most popular artists with songs in the top 50 with `Runaway` and `Alright` respectively
+Woww this definitely tracks. Props to Harry Styles and X-Ray Spex for lining up their artist popularity generally with their song popularity. Now I'll make the same plot I built above at the artist level. It turns out Kanye West and Kendrick Lamar are the two most popular artists with songs in the top 50 with `Runaway` and `Alright` respectively.
 
 
 ```python
@@ -1024,7 +996,7 @@ plot_popularity_against_artist_rank(artist_df, outpath="images/artist_pop.png")
 
 ## Advanced Analytics Part 1 - Forecast the album release date
 
-With all of these new quantitative measures, I started to wonder if I could actually use machine learning in some way on this list. For example, maybe in different years there was a trend for the top songs to have varying amounts of accousticenss or loudness. Or, if I wanted to, I could leverage the artist genres to see if there was a correlation between the top songs and their genres. Below, I implement I simple pipeline using Scikit Learn on a Random Forest. First I split my data and define my datatypes. Then I provide two helper functions for handling boolean variables and for running [Singular Value Decomposition](https://www.geeksforgeeks.org/singular-value-decomposition-svd/) on the combined results. Finally, I define a my pipeline, fit it to the data, and predict some release years.
+With all of these new quantitative measures, I started to wonder if I could actually use machine learning in some way on this list. For example, maybe in different years there was a trend for the top songs to have varying amounts of accousticenss or loudness. Or, if I wanted to, I could leverage the artist genres to see if there was a correlation between the top songs and their genres. Below, I implement a simple pipeline using scikit-learn on a random forest. First I split my data and define my datatypes. Then I provide two helper functions for handling boolean variables and for running [singular value decomposition](https://www.geeksforgeeks.org/singular-value-decomposition-svd/) on the combined results. Finally, I define my pipeline, fit it to the data, and predict release years.
 
 
 ```python
@@ -1141,7 +1113,7 @@ steps = [
 
 pipe = Pipeline(
     steps=steps,
-    verbose=True,
+    verbose=False,
 )
 
 ```
@@ -1150,7 +1122,7 @@ pipe = Pipeline(
 ```python
 # Run grid search to tune hyper parameters
 estimator = GridSearchCV(pipe, param_grid=param_grid, cv=5, scoring='neg_mean_absolute_error', n_jobs=-1,) 
-estimator.fit(X_train, Y_train)
+x = estimator.fit(X_train, Y_train)
 ```
 
 ![ml_pipeline](images/ml_pipeline.jpg)
@@ -1382,9 +1354,9 @@ pipeline = Pipeline(
         ("umap", umap.UMAP(random_state=42)),
         ("dbscan", DBSCAN())
     ],
-    verbose=True
+    verbose=False
 )
-pipeline
+
 ```
 
 ![new_cluster](images/cluster_pipeline_1.jpg)
@@ -1562,11 +1534,10 @@ pipeline = Pipeline(
         ("umap", umap.UMAP(random_state=42)),
         ("dbscan", DBSCAN())
     ],
-    verbose=True
+    verbose=False
 )
-pipeline
-```
 
+```
 
 ![new_cluster](images/cluster_pipeline_2.jpg)
 
