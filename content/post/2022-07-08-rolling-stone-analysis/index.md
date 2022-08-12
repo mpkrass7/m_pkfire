@@ -16,7 +16,7 @@ image:
 projects: []
 ---
 
-In a previous post, I ranted about ranking systems and webscraped data on a fascinating list - Rolling Stone Magazine's Top 500 Greatest Songs of All Time. In this post, I pull the data again using the Spotify API and perform more in depth analytics on it including supervised learning, dimensionality reduction, and unsupervised learning. I also use Streamlit to make a web application that allows you to explore the data and see the results in a more interactive way.
+In a [previous post](https://www.marshallpk.com/post/rolling-stone-top-500/), I ranted about ranking systems and webscraped data on a fascinating list - Rolling Stone Magazine's Top 500 Greatest Songs of All Time. In this post, I pull the data again using the Spotify API and perform more in depth analytics on it including supervised learning, dimensionality reduction, and unsupervised learning. I also use Streamlit to make a web application that allows you to explore the data and see the results in a more interactive way.
 
 ## Background
 
