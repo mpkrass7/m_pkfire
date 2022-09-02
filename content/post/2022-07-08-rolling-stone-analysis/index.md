@@ -18,6 +18,10 @@ projects: []
 
 In a [previous post](https://www.marshallpk.com/post/rolling-stone-top-500/), I ranted about ranking systems and webscraped data on a fascinating list - Rolling Stone Magazine's Top 500 Greatest Songs of All Time. In this post, I pull the data again using the Spotify API and perform more in depth analytics on it including supervised learning, dimensionality reduction, and unsupervised learning. I also use Streamlit to make a web application that allows you to explore the data and see the results in a more interactive way.
 
+## TL/DR because this article is long
+
+For those who don't want to read the article, I built an accompanying Streamlit application for further exploration of the Rolling Stone top 500 data. Try it out [here](https://mpkrass7-redesigned-octo-disco-streamlit-bigger-appapp-bd2mgm.streamlitapp.com/). You can also download the dataset [here](data/spotify_music_output.csv) for your own use.
+
 ## Background
 
 Released in September 2021, Rolling Stone attempted to rank what maybe shouldn't be ranked. Across all genres over the last 100 years, they ordered from 1 to 500 what they considered to be the best songs of all time. It was the first time they made a list like this in 17 years. In constructing the list, they surveyed a bunch of artists and music critics about their 50 favorite songs and aggregated the results to create their ranking. Possibly because of who they surveyed and possibly because of how they scored the survey results, the emerging list makes the listener stop and think, "Really? Gasolina by Daddy Yankee is in the top 50?". Yet for all of its spicy takes, it makes for an excellent ~34 hour playlist, and I've been obsessed with it for almost a year.
@@ -609,7 +613,7 @@ df.to_csv('data/spotify_music_output.csv',index=False)
 
 ## The Measures We Have
 
-In less than two minutes, we have complete data on all 500 songs in the list! I'm almost upset with how easy this was compared with scraping the data from Rolling Stone Magazine. Great job Spotify. Still, we might wonder why I bothered to gather this info given I already did it before even if it is cleaner and more reliable. But as I said above, the other reason I went through the trouble to pull this was for the beautiful quantitative measures we can get for each song on the list. I'll show why these are so useful for my purposes in a little bit. As an example of what we have, below I show some new measures we have for stronger. 
+In less than two minutes, we have complete data on all 500 songs in the list! I'm almost upset with how easy this was compared with scraping the data from Rolling Stone Magazine. Great job Spotify. Still, we might wonder why I bothered to gather this info given I already did it before even if it is cleaner and more reliable. But as I said above, the other reason I went through the trouble to pull this was for the beautiful quantitative measures we can get for each song on the list. I'll show why these are so useful for my purposes in a little bit. As an example of what we have, below I show some new measures we have for the song "Stronger" by Kanye West. 
 
 
 ```python
@@ -640,7 +644,7 @@ sp.audio_features(track_uris[0])[0]
 
 
 
-Some explanation of what some of these metrics is worthwhile. I pulled these definitions straight from the spotify documentation
+Some explanation of what some of these metrics mean is worthwhile. I pulled these definitions straight from the spotify documentation and include them here for completeness.
 
 - acousticness: A confidence measure from 0.0 to 1.0 of whether the track is acoustic. 1.0 represents high confidence the track is acoustic. 
 
@@ -806,7 +810,7 @@ Alright now that I have my dataset, I'd like to answer some important questions.
 Man, Kate Bush's Running up that hill as number 1. Given the recent release of [season 4 of Stranger Things](https://www.theringer.com/music/2022/6/7/23157824/kate-bush-running-up-that-hill-stranger-things-billboard-charts), that tracks.
 
 
-As a Neil Young fan, I'm kind of sad to see Powder Finger so low although it's not really one of my favorite songs by him anyway. The Humpty Dance is amusing. If you've never listened to it, I recommend checking it out.
+As a Neil Young fan, I'm kind of sad to see Powder Finger so low although it's not really one of my favorite songs by him anyway. The Humpty Dance is amusing. If you've never listened to it, I recommend [checking it out](https://www.youtube.com/watch?v=PBsjggc5jHM&ab_channel=TommyBoy).
 
 Following on rank against popularity, I'm curious if more currently popular songs tend to be ranked higher on the list. Below I make a simple scatter plot showing the rank against the popularity of the top 500 songs.
 
@@ -958,7 +962,7 @@ artist_df
 
 
 
-Woww this definitely tracks. Props to Harry Styles and X-Ray Spex for lining up their artist popularity generally with their song popularity. Now I'll make the same plot I built above at the artist level. It turns out Kanye West and Kendrick Lamar are the two most popular artists with songs in the top 50 with `Runaway` and `Alright` respectively.
+Wow this definitely tracks. Props to Harry Styles and X-Ray Spex for lining up their artist popularity generally with their song popularity. Now I'll make the same plot I built above at the artist level. It turns out Kanye West and Kendrick Lamar are the two most popular artists with songs in the top 50 with `Runaway` and `Alright` respectively.
 
 
 ```python
@@ -996,7 +1000,7 @@ plot_popularity_against_artist_rank(artist_df, outpath="images/artist_pop.png")
 
 ## Advanced Analytics Part 1 - Forecast the album release date
 
-With all of these new quantitative measures, I started to wonder if I could actually use machine learning in some way on this list. For example, maybe in different years there was a trend for the top songs to have varying amounts of accousticenss or loudness. Or, if I wanted to, I could leverage the artist genres to see if there was a correlation between the top songs and their genres. Below, I implement a simple pipeline using scikit-learn on a random forest. First I split my data and define my datatypes. Then I provide two helper functions for handling boolean variables and for running [singular value decomposition](https://www.geeksforgeeks.org/singular-value-decomposition-svd/) on the combined results. Finally, I define my pipeline, fit it to the data, and predict release years.
+With all of these new quantitative measures, I started to wonder if I could actually use machine learning in some way on this list. For example, maybe in different years there was a trend for the top songs to have varying amounts of accousticenss or loudness. Or, if I wanted to, I could leverage the artist genres to see if there was a correlation between the top songs and their genres. Below, I implement a simple pipeline using scikit-learn on a random forest. First, I split my data and define my datatypes. Then I provide two helper functions for handling boolean variables and for running [singular value decomposition](https://www.geeksforgeeks.org/singular-value-decomposition-svd/) on the combined results. Finally, I define my pipeline, fit it to the data, and predict release years.
 
 
 ```python
@@ -1120,7 +1124,7 @@ pipe = Pipeline(
 
 
 ```python
-# Run grid search to tune hyper parameters
+# Run grid search to tune hyperparameters
 estimator = GridSearchCV(pipe, param_grid=param_grid, cv=5, scoring='neg_mean_absolute_error', n_jobs=-1,) 
 x = estimator.fit(X_train, Y_train)
 ```
@@ -1128,10 +1132,10 @@ x = estimator.fit(X_train, Y_train)
 ![ml_pipeline](images/ml_pipeline.jpg)
 
 
-Alright, we've fit our model, and found our hyper parameters. I also printed out the average cross validation score from the best hyper parameter settings. We have an in sample MAE of about 10. In other words, when the model predicts a release year, it's off by 10 years on average. Considering the space of songs is about 100 years in total, the performance is actually a little better than I expected it to be. There are two easy reasons to I can use to explain this: 
+Alright, we've fit our model, and found our hyperparameters. I also printed out the average cross validation score from the best hyperparameter settings. We have an in sample MAE of about 10. In other words, when the model predicts a release year, it's off by 10 years on average. Considering the space of songs is about 100 years in total, the performance is actually a little better than I expected it to be. There are two easy reasons to I can use to explain this: 
 
 1. This estimate is overly optimistic as I explain in my article about [nested cross validation](https://www.marshallpk.com/post/nested-cross-validation/). When I evaluate the model on the test set, performance will probably be a little lower.
-2. This estimate and the holdout set have some leakage because I randomly split my dataset instead of partioning it by the artist name. The problem with random partitioning in this case is that I have artist level features like popularity and genre that are essentially duplicated in training validation and holdout sets. For exmaple, the list of artist genres affiliated with each song of the Beatles' is `[beatlesque, british invasion, classic rock, merseybeat, psychedelic rock, rock]`. No other artist will have 'beatlesque' in their genre so when the models sees this on the holdout data, it will know the release year of the album will be much lower than with other songs. This leakage will persist in the holdout set. I should repartition my data more thoughtfully, but I'm just kind of having fun here. My article, my rules! 
+2. This estimate and the holdout set have some leakage because I randomly split my dataset instead of partioning it by the artist name. The problem with random partitioning in this case is that I have artist level features like popularity and genre that are essentially duplicated in training validation and holdout sets. For exmaple, the list of artist genres affiliated with each song of the Beatles' is `[beatlesque, british invasion, classic rock, merseybeat, psychedelic rock, rock]`. No other artist will have 'beatlesque' in their genre so when the model sees this on the holdout data, it will know the release year of the album will be much lower than with other songs. This leakage will persist in the holdout set. I should repartition my data more thoughtfully, but I'm just kind of having fun here. My article, my rules! 
 
 
 ```python
@@ -1162,7 +1166,7 @@ print(f"Fraction of deviance explained: {r2}%")
 
 ## Advanced Analytics Part 2 - Dimensionality Reduction and Clustering
 
-Now I want to disperse with machine learning in the predictive sense. Instead, I think I'm going to try and find tracks that are similar to each other. For example, I just moved in with this couple in Lawrenceville. One of my new roommates told me "I think all of those 80's rock bands sound the same. Like I never know which song is AC/DC or Kiss, or the Eagles".
+Now I want to disperse with machine learning in the predictive sense. Instead, I think I'm going to try and find tracks that are similar to each other. For example, I just moved in with this couple in Lawrenceville. One of my new roommates told me, "I think all of those 80's rock bands sound the same. Like I never know which song is AC/DC or Kiss, or the Eagles".
 
 Now first of all, the Eagles became famous in the mid 70's. Kiss, surprisingly, also became famous in the later 70's rather than the 80's. Regardless of timelines, I would secondly debate the claim that the Eagles sound at all similar to AC/DC or Kiss. Luckily, I now have data on at least one of each of these bands most famous songs. So, I'm going to do three things here:
 
@@ -1332,7 +1336,7 @@ df.loc[lambda x: x.artist_name.str.lower().isin(search_artists)]
 
 ### Build Pipeline
 
-The pipe I will use for this will be similar to the one I used for predicting the album release year. In fact, I can even preprocessing steps from the previous section and then just apply UMAP and DBSCAN on the results.
+The pipe I will use for this will be similar to the one I used for predicting the album release year. In fact, I can even reuse the preprocessing steps from the previous section and then just apply UMAP and DBSCAN on the results.
 
 
 ```python
@@ -1361,7 +1365,7 @@ pipeline = Pipeline(
 
 ![new_cluster](images/cluster_pipeline_1.jpg)
 
-Now I'll use the first two steps to decompose the dataset into a two dimensional planeThis will let me plot the results in a 2D. Then, I let the full pipeline run so I can get cluster assignments. 
+Now I'll use the first two steps to decompose the dataset into a two dimensional plane. This will let me plot the results in a 2D. Then, I let the full pipeline run so I can get cluster assignments. 
 
 
 ```python
@@ -1399,7 +1403,7 @@ clusters_2d = (pipeline
 
 ### Plotting the results
 
-Below I plot my two dimensional embedding and clustering results, marking the artists I was comparing with a star. In this case, Boys of Summer by Don Henley was placed right near Hotel California by the Eagles while Shook Me All Night Long by AC/DC was placed near Rock and Roll All Night by Kiss. While these were the results I expected to prove. I actually see a problem with them. Far to the left are all of the Beatles songs. Why are they all so close together? Do they really all sound the same? No, they certainly do not. The issue here is that I'm using the artist genre in my dimensionality reduction and because I'm running ngrams on that text field, it creates a ton of extra features, each with the same weight as the numeric features. I'll need to run this again and remove the text features. I'll also throw out the categorical features for the same reason.
+Below I plot my two dimensional embedding and clustering results, marking the artists I was comparing with a star. In this case, Boys of Summer by Don Henley was placed right near Hotel California by the Eagles while Shook Me All Night Long by AC/DC was placed near Rock and Roll All Night by Kiss. While these were the results I expected to prove. I actually see a problem with them. Far to the left are all of the Beatles songs. Why are they all so close together? Do they really all sound the same? No, they certainly do not. The issue here is that I'm using the artist genre in my dimensionality reduction process. Because I'm running ngrams on that text field, it creates a ton of extra features. Each of these has the same weight as the numeric features. I'll need to run this again and remove the text features. I'll also throw out the categorical features for the same reason.
 
 
 ```python
@@ -1468,8 +1472,7 @@ def plot_embedding(df, umap_embedding, clusters, artist_indexes, outpath=None):
         marker_line_width=1,
         marker=dict(
             size=10,
-            color=clusters,                # set color to an array/list of desired values
-            # colorscale='Viridis',   # choose a colorscale
+            color=clusters,  
             opacity=0.75
         )
         )])
@@ -1514,8 +1517,7 @@ plot_embedding(df, umap_embedding, clusters_2d, artist_indexes, outpath="images/
 
 ### Dimensionality Reduction and Clustering - Take 2
 
-Below I run the same pipeline, this time only taking my numeric features. Since there will be far fewer features to run UMAP on, I also remove the Singular Value Decomposition step.
-
+Below I run the same pipeline, this time only taking my numeric features. Since there will be far fewer features to run UMAP on, I also remove the Singular Value Decomposition step. 
 
 
 ```python
@@ -1602,7 +1604,7 @@ plot_embedding(df, umap_embedding, clusters_2d, artist_indexes, outpath="images/
 
 ![2d_embed](images/umap_2d_second_take.png)
 
-Interestingly, now all of the tracks are pretty far away from each other. Does this make this representation meaningless? I think the answer is no. Looking around the chart on the far left, I found 'Crying' by Roy Orbison next to 'River' by Joni Mitchell and 'Yesterday' by the Beatles. On the far right, I see a bunch of rap songs like 'The Message' by Grandmaster Flash and 'Nuthin But a 'G' Thang' by Dr Dre. These actually kind of track. What looks less good in this group are the actual cluster assignments, which don't seem to contribute much knowledge at all. In a future implementation, I'd like to try this again using Kmeans or HDBSCAN, or maybe just by using the song rank. It would also be nice to see what features have the most influence on the structure of this embedding. I know I could find this if I had used PCA to create my embedding, but I'll leave doing it to another post. In the meantime, let's look at the 3D embedding.
+Interestingly, now all of the tracks are pretty far away from each other. Does this make this representation meaningless? I think the answer is no. Looking around the chart on the far left, I found 'Crying' by Roy Orbison next to 'River' by Joni Mitchell and 'Yesterday' by the Beatles. On the far right, I see a bunch of rap songs like 'The Message' by Grandmaster Flash and 'Nuthin But a 'G' Thang' by Dr Dre. These actually kind of track. What looks less good in this group are the actual cluster assignments, which don't seem to contribute much knowledge at all. In a future implementation, I'd like to try this again using Kmeans or HDBSCAN. Then again, a friend of mine once told me that clustering is "Like reading chicken scratch". It would also be nice to see what features have the most influence on the structure of this embedding. I know I could find this if I had used PCA instead of UMAP, but I'll leave doing it to another post. In the meantime, let's look at the 3D embedding.
 
 
 ```python
@@ -1615,7 +1617,7 @@ plot_embedding(df, umap_embedding_3d, clusters_3d, artist_indexes, outpath="imag
 
 
 Welp, it's a mess but it's my mess. There are a few conclusions I can draw from this exercise.
-- The features you include in dimensionality reductions are important, and without proper handling they will have outsized influence if they are categorical or especially text. One way we could potentially handle this is by running SVD earlier on in the pipeline, exclusively on the categorical and text variables.
+- The features you include in dimensionality reduction are important, and without proper handling they will have outsized influence if they are categorical or especially text. One way we could potentially handle this is by running SVD earlier on in the pipeline, exclusively on the categorical and text variables.
 - Be careful with your clustering methodology. As we see from the chart above, the cluster assignments created from running DBSCAN on one set of parameters are not great.
 - Unsupervised learning can be a great way to find patterns in high dimensional data but it can also be like reading signs from chicken scratch. We can drastically impact cluster assignments and embeddings by varying features to include as well as parameters for UMAP and DBSCAN.
 
@@ -1625,10 +1627,12 @@ If you are interested in learning more or talking to me about this subject (espe
 
 
 
-
 ## References
 - “2.3. Clustering.” Scikit-Learn, https://scikit-learn/stable/modules/clustering.html. Accessed 9 July 2022.
 - “6.1. Pipelines and Composite Estimators.” Scikit-Learn, https://scikit-learn/stable/modules/compose.html. Accessed 9 July 2022.
 - 500 Best Songs of All Time - Rolling Stone. https://www.rollingstone.com/music/music-lists/best-songs-of-all-time-1224767/. Accessed 9 July 2022.
 
-None of this has anything to do with DataRobot, the company I work at. Nonetheless, I thank all of my coworkers who came to that one deep dive session on Streamlit I did a couple weeks ago because it inspired me to build my app and make this post.  
+## Credits
+None of this has anything to do with DataRobot, the company I work at. Nonetheless, I thank all of my coworkers who came to that one deep dive session on Streamlit I did a couple weeks ago because it inspired me to build my app and make this post.
+
+
