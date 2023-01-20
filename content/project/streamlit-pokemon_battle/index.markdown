@@ -35,9 +35,9 @@ While simple, this application was great for my demo because it showed a lot of 
 
 There is obviously a ton more that one can do by leveraging Streamlit, but the app achieved its goal of demonstrating flexibility and ease of construction.
 
-Play with the app below or view it [here](https://share.streamlit.io/mpkrass7/pokemon_battle_predictor/publish_to_streamlit/battle_simulator.py) (it's better). Don't forget to submit your favorite Pokemon!
+Play with the app below or view it [here](https://pokepredict.streamlit.app/) (it's better). Don't forget to submit your favorite Pokemon!
 
-<iframe src="https://share.streamlit.io/mpkrass7/pokemon_battle_predictor/publish_to_streamlit/battle_simulator.py" width="1152" height="900px"></iframe>
+<iframe src="https://pokepredict.streamlit.app/" width="1152" height="900px"></iframe>
 
 
 

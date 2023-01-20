@@ -26,12 +26,12 @@ At DataRobot, I had a project in collaboration with the office of Housing and Ur
 <!-- <img src="migration_demo.gif" alt="Migration app" style="text-align: center;> -->
 <!-- </div> -->
 
-Play with US migration app below or view it  [here](https://share.streamlit.io/mpkrass7/solid-octo-robot/migration_app.py) (it's better).
+Play with US migration app below or view it  [here](https://statesmigrate.streamlit.app/) (it's better).
 
 
 ```{r MigrationApp, message=FALSE, echo=FALSE, fig.align = 'left', fig.width=14}
 knitr::include_app(
-  "https://share.streamlit.io/mpkrass7/solid-octo-robot/migration_app.py",
+  "https://statesmigrate.streamlit.app/",
   height = '900px'
   )
 ```
