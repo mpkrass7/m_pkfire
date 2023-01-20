@@ -35,9 +35,9 @@ While simple, this application was great for my demo because it showed a lot of 
 
 There is obviously a ton more that one can do by leveraging Streamlit, but the app achieved its goal of demonstrating flexibility and ease of construction.
 
-Play with the app below or view it [here](https://pokepredict.streamlit.app/) (it's better). Don't forget to submit your favorite Pokemon!
+View the app [here](https://pokepredict.streamlit.app/) and pin two Pokemon against each other in heated battle!
 
-<iframe src="https://pokepredict.streamlit.app/" width="1152" height="900px"></iframe>
+<!-- <iframe src="https://pokepredict.streamlit.app/" width="1152" height="900px"></iframe> -->
 
 
 

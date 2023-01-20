@@ -26,10 +26,10 @@ At DataRobot, I had a project in collaboration with the office of Housing and Ur
 <!-- <img src="migration_demo.gif" alt="Migration app" style="text-align: center;> -->
 <!-- </div> -->
 
-Play with US migration app below or view it  [here](https://statesmigrate.streamlit.app/) (it's better).
+Play with US migration [here](https://statesmigrate.streamlit.app/)!
 
 
-<iframe src="https://statesmigrate.streamlit.app/" width="1344" height="900px"></iframe>
+<!-- <iframe src="https://statesmigrate.streamlit.app/" width="1344" height="900px"></iframe> -->
 
 ### Build it yourself
 

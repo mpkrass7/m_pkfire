@@ -28,7 +28,7 @@ As shown above, the application allows users to pick there favorite Pokemon amon
 
 In addition to the database piece I have a pretty pithy analysis page that uses Principal Component Analysis to put Pokemon on a two-dimensional plane for some directional comparison. Ever wonder how similar Psyduck is to Bulbasaur? Try looking at the tab marked 'analysis'. Getting the Pokemon images to dynamically render on my Plotly object is still one of my favorite visualization accomplishments to date.
 
-Play with the app below or view it [here](https://thawing-peak-12115.herokuapp.com/) (it's better). Don't forget to submit your favorite Pokemon!
+View the app below or follow the link [here](https://thawing-peak-12115.herokuapp.com/). Don't forget to submit your favorite Pokemon!
 
 <iframe src="https://thawing-peak-12115.herokuapp.com/" width="1152" height="900px"></iframe>
 
