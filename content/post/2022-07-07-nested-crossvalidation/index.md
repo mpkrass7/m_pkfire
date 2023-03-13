@@ -382,7 +382,6 @@ plot_experiment(outer_scores, nested_scores, outpath="images/experiment_results.
 
     
 ![png](images/experiment_results.png)
-    
 
 
 ### Concluding
