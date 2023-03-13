@@ -6,7 +6,7 @@ slug: sleepy-apps
 categories: []
 tags: [python, r, bash, cron, streamlit, shiny, dash, asyncio, selenium]
 subtitle: ''
-summary: 'A sneaky solution to keeping my web-apps awake 24/7'
+summary: 'Using selenium cron and asyncio for 24/7 service'
 authors: [Marshall Krassenstein]
 featured: yes
 image:
