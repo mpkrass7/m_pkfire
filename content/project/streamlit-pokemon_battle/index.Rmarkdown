@@ -4,7 +4,7 @@ author: Marshall Krassenstein
 date: '2021-12-09'
 slug: battle-predictor
 categories: []
-tags: [Python, Machine-Learning, Webapp]
+tags: [Python, Machine-Learning, web app]
 subtitle: ''
 summary: 'An app I built that predicts the winner of pokemon battles'
 authors: [Marshall Krassenstein]
@@ -18,9 +18,9 @@ projects: []
 ---
 
 
-DataRobot is good at Machine Learning. What it's not super good at is allowing users to build customizable webapps around their models. 
+DataRobot is good at Machine Learning. What it's not super good at is allowing users to build customizable web apps around their models. 
 Meanwhile, my team at work didn't know too much about easy ways to code up small applications so they were a little bit stuck using our in house app builder. 
-Enter Streamlit and the example app I whipped up to show why Pythonic webapps and machine learning go hand in hand. And yes, it's my second Pokemon app. Sue me if you don't like it..
+Enter Streamlit and the example app I whipped up to show why Pythonic web apps and machine learning go hand in hand. And yes, it's my second Pokemon app. Sue me if you don't like it..
 
 ![Battle Predicting in Action](battle_simulator_gif.gif)
 

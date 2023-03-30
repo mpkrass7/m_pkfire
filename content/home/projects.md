@@ -33,8 +33,8 @@ content:
     tag: python
   - name: Tableau
     tag: Tableau
-  - name: Webapp
-    tag: webapp
+  - name: web app
+    tag: web app
   - name: Machine Learning
     tag: machine-learning
 

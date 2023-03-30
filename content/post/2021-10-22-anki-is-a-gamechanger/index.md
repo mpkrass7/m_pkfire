@@ -21,7 +21,7 @@ Here are some questions for any Data Science practitioners or really anyone who 
 - Have you ever learned something, be it a concept, formula, maxim, or story, and told yourself, "I will remember this", and then forgot?
 - Have you ever not told yourself, "I will remember this", because it seemed so obvious you would that you didn't even bother to remark upon it to yourself, and then forgot?
 - As you try to recall examples of either, is it possible that right now, you're forgetting the very fact that you forgot some things you told yourself you would remember?
-- Do you perhaps hear something and are so congnizant of your own terrible memory that you acknowledge to yourself that you probably won't remember it even if you want to? 
+- Do you perhaps hear something and are so cognizant of your own terrible memory that you acknowledge to yourself that you probably won't remember it even if you want to? 
 
 If the last bullet applies to you, I applaud your self-awareness. If any of these apply to you, then think about using Anki.
 
@@ -31,7 +31,7 @@ Fundamentally, Anki is a free and simple application used to make flashcards. Yo
 
 ## Why Anki?
 
-If an application for building flashcards does not sound particularly compelling to you, I get it. When my friend first told me about how she used Anki flashcards to study human anatomy in medical school at the University of Pittsburgh, I hardly acknowledged the comment. I didn't decide to give it a try until I read a long rant witten by someone who used Anki to memorize the command line on his computer at the same time I started learning basic bash scripting.
+If an application for building flashcards does not sound particularly compelling to you, I get it. When my friend first told me about how she used Anki flashcards to study human anatomy in medical school at the University of Pittsburgh, I hardly acknowledged the comment. I didn't decide to give it a try until I read a long rant written by someone who used Anki to memorize the command line on his computer at the same time I started learning basic bash scripting.
 
 So, I downloaded the application and made a few flash cards. It was not a particularly overwhelming experience as far as flash cards go. You make a deck of cards with a question in the front and an answer in the back. You give the deck a title and quiz yourself. If you remembered what you wrote down, you could click a box that said 'Easy'. Otherwise you could click 'Good' or 'Hard' if you kind of remembered, or 'Again' if you couldn't remember at all. The button you clicked determined how long it would take for the deck to quiz you again. 
 
@@ -47,7 +47,7 @@ Many tests have been conducted to assess memory, and it turns out there's a subs
 
 What if I really, really want to remember something and I say to myself, "I *must* remember this"? What do you think? I *might* remember but honestly, I will probably forget and knowing me and most other humans, it will be sooner rather than later. Even if the probability of forgetting was low, my memory would still be a chance event rather than a choice. 
 
-"But wait", you say. "What if I study?". Great idea, intuitively reviewing a concept, as in studying it more than once is a great way to bring it into your long term memory<sup>3</sup>. That's why teachers tell students to build flash cards. Just by constructing their own flashcards, students review content at least once. And then every time they study them, they learn the content more confidentally. It turns out that periodically reviewing flash cards can be broken down into two concepts called *active recall testing* and *spaced repetition*. These concepts have existed in scientific literature for [many years<sup>4</sup>](https://www.gwern.net/docs/spaced-repetition/1939-spitzer.pdf).
+"But wait", you say. "What if I study?". Great idea, intuitively reviewing a concept, as in studying it more than once is a great way to bring it into your long term memory<sup>3</sup>. That's why teachers tell students to build flash cards. Just by constructing their own flashcards, students review content at least once. And then every time they study them, they learn the content and recall it with more confidence. It turns out that periodically reviewing flash cards can be broken down into two concepts called *active recall testing* and *spaced repetition*. These concepts have existed in scientific literature for [many years<sup>4</sup>](https://www.gwern.net/docs/spaced-repetition/1939-spitzer.pdf).
 
 Except, handwriting flashcards is a pain and we all know that you forget content in flashcards after a while if you don't keep reviewing. So, you need to continually review your deck. But how often? Somehow, you need to apply a kind of logical spacing between your reviews. More so, you should also review concepts you are less confident about more often than concepts you know. Finally, you need a systematic way to space out those reviews *even as you dynamically add more content to review*. If you were making an ordinary flash card deck, this would be annoying at least and infuriating at worst. In fact, it's not even sustainable. If you build 10 flashcards, you could run through them once a week let's say. It wouldn't take much of your time. If you built 100 flashcards, it would be annoying but still possible to do on a weekly basis. If you built 1,000 flashcards, well, you get the idea.
 
@@ -57,7 +57,7 @@ The dynamic spacing between review is what makes Anki so useful<sup>5</sup>. Whe
 
 ## Anki is Widely Applicable
 
-As you might have noticed in the screenshot above, I have decks for Pubilc Health, Machine Learning, Vocabulary, Sales, Company Product, Computing and even Jokes. It might seem surprising that I made flashcards on so many topics. And you might be justifiably skeptical of people who could claim to learn something like statistics through rote memorization. I do agree that memorization is by no means a replacement for learning a complex idea in the first place, but I'd argue it's incredibly useful to solidify your understanding of a complex idea. Let me illustrate with an example on model interpretability. For the non-data scientists reading this, I apologize for referencing a topic you might find a little boring. Rather than trying to understand the example, try instead to think about how you could do something similar in your subject of interest.
+As you might have noticed in the screenshot above, I have decks for Public Health, Machine Learning, Vocabulary, Sales, Company Product, Computing and even Jokes. It might seem surprising that I made flashcards on so many topics. And you might be justifiably skeptical of people who could claim to learn something like statistics through rote memorization. I do agree that memorization is by no means a replacement for learning a complex idea in the first place, but I'd argue it's incredibly useful to solidify your understanding of a complex idea. Let me illustrate with an example on model interpretability. For the non-data scientists reading this, I apologize for referencing a topic you might find a little boring. Rather than trying to understand the example, try instead to think about how you could do something similar in your subject of interest.
 
 ### LIME
 
@@ -65,7 +65,7 @@ To show how you can use Anki to learn and retain complex ideas, I'm going to tal
 1. Sample new data points by creating perturbations around a given data point
 2. Weight the synthetic data points by their proximity to the original data point
 3. Apply these synthetic data points to the current trained model to generate predictions
-4. Train a linear model fit to these data synthetic datapoints, with the target variable as the generated predictions
+4. Train a linear model fit to these data synthetic data points, with the target variable as the generated predictions
 5. The feature explanation is the coefficients of the linear model
 
 It turns out there are a decent amount of problems with the algorithm for LIME. Without diving further into the weeds than we already have, it generates points from a normal distribution even when they might not be possible in real data, it samples them so that explanations are not consistent between identical models, it has multiple hyperparameters that need to be tuned, it's computationally expensive to explain even one point, and the linear approximation it makes might not even be consistent. 
@@ -79,7 +79,7 @@ Ok, great we all know LIME, at least in our short term memories. Now, if you hav
 
 ### Good Flashcard(s)
 
-So let's qualify here and say you know a thing or two about building models, someone mentioned LIME to you, and you actually want to learn what it does. You also still want to know what it does a year from now or else it's just not worth wasting your time learning it in the first place. Here's how you could confidentally accomplish that with Anki.
+So let's qualify here and say you know a thing or two about building models, someone mentioned LIME to you, and you actually want to learn what it does. You also still want to know what it does a year from now or else it's just not worth wasting your time learning it in the first place. Here's how you could confidently accomplish that with Anki.
 
 1. Break down what you just read. Most people cannot easily memorize every detail of an article or complex idea. It is very frustrating to see a flashcard saying 'What is Lime?" that includes a back with giant paragraphs of text. The way I broke down LIME was to make three flashcards with different points about it. 
    

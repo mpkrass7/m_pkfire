@@ -36,7 +36,7 @@ Now if this article is for you, then you probably also realize that you need mor
 
 Now before we go on, please do pay attention to the above claim and make sure you understand why you can't use your holdout set both for choosing between hyperparameter options **and** for evaluating the chosen model. I will return to this idea, because it is the most important piece to understanding why nested cross validation is so important. 
 
-But first I want to talk through one more point. Now, continuing the hypothesis that you are the intended audience of this article, I will further surmise that you are also familiar with cross validation, the magical and commonly used data slicing strategy that lets you turn your training data into a debiased validation set. Effectively, you take your training dataset cut it into *n* equally sized pieces, fit a model using all of the data in *n-1* pieces, then evalute on the remaining piece. You repeat this process until each piece has been used as the single evaluating dataset. cross validation looks like this:
+But first I want to talk through one more point. Now, continuing the hypothesis that you are the intended audience of this article, I will further surmise that you are also familiar with cross validation, the magical and commonly used data slicing strategy that lets you turn your training data into a debiased validation set. Effectively, you take your training dataset cut it into *n* equally sized pieces, fit a model using all of the data in *n-1* pieces, then evaluate on the remaining piece. You repeat this process until each piece has been used as the single evaluating dataset. cross validation looks like this:
 
 ![cross validation](images/cross_validation.jpeg)
 

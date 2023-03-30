@@ -18,7 +18,7 @@ image:
 projects: []
 ---
 
-I occassionally look around Stackoverflow for questions I can answer to practice coding and explaining my solutions. The other day, I perused the forums and saw a NetworkX question. Having some experience with network analysis (although much more with iGraph), I figured I'd try my hand at answering it. Another person beat me to the post, but at his encouragement I added my own spin on it using Plotly. So, if you find yourself struggling to plot a coherent and interactive network graphic in Python, read on!
+I occasionally look around Stackoverflow for questions I can answer to practice coding and explaining my solutions. The other day, I perused the forums and saw a NetworkX question. Having some experience with network analysis (although much more with iGraph), I figured I'd try my hand at answering it. Another person beat me to the post, but at his encouragement I added my own spin on it using plotly. So, if you find yourself struggling to plot a coherent and interactive network graphic in Python, read on!
 
 ## Question
 
@@ -26,7 +26,7 @@ I occassionally look around Stackoverflow for questions I can answer to practice
 
 ## Answer
 
-If you're ok using a non networkx package, you can do what you're asking to do with Plotly, which gives the added benefit of interactivity:
+If you're ok using a non networkx package, you can do what you're asking to do with plotly, which gives the added benefit of interactivity:
 
 
 ### Import packages and set up minimum reproducible example
@@ -91,7 +91,7 @@ nx.set_node_attributes(G, rank_dict)
 
 ### Build edges
 
-We run a loop to build edges between the nodes. We append **None** to after every edge coordinate so that Plotly doesn't try to connect them
+We run a loop to build edges between the nodes. We append **None** to after every edge coordinate so that plotly doesn't try to connect them.
 
 
 ```python
@@ -117,7 +117,7 @@ edge_trace = go.Scatter(
 
 ### Build Nodes
 
-Here we set up our nodes. If they're in the top 5 by page rank we add them to one list, otherwise we add them to another. This accomplishes two things. First it is a very easy way to set the color of the top 5 group. More importantly, it also places those top 5 nodes in front of the other nodes, since they are applied to the Plotly canvas after
+Here we set up our nodes. If they're in the top 5 by page rank we add them to one list, otherwise we add them to another. This accomplishes two things. First it is a very easy way to set the color of the top 5 group. More importantly, it also places those top 5 nodes in front of the other nodes, since they are applied to the plotly canvas after.
 
 
 ```python
@@ -163,7 +163,7 @@ node_trace2.text = g2_texts
 ```
 
 ### Build your chart
-Finally, create your plotly figure and add in each trace. Then update your layout as desired
+Finally, create your plotly figure and add in each trace. Then update your layout as desired.
 
 
 ```python

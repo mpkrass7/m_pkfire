@@ -126,21 +126,21 @@ The act of opening a webpage takes a couple of seconds which is why this script 
 Once I wrote the Python code, the rest was easy. First, I created a small bash script that runs my Python function.
 
 ```bash
-echo "Refreshing sleepy webapps.."
+echo "Refreshing sleepy web apps.."
 /Users/marshall.krassenstein/.pyenv/versions/general_env/bin/python run_sleepy_apps.py
 ```
 
 Then, I scheduled my bash script to trigger with a cron job.
 
 ```
-30 8,14 * * * cd /Users/marshall.krassenstein/desktop/random_projects/run_sleepy_apps && bash run_sleepy_refresh.sh > /tmp/throwaway.log 2>/tmp/webapp_refresh.log
+30 8,14 * * * cd /Users/marshall.krassenstein/desktop/random_projects/run_sleepy_apps && bash run_sleepy_refresh.sh > /tmp/throwaway.log 2>/tmp/web app_refresh.log
 ```
 
 Breaking this down:
 `30 8,14 * * *`: Every day at 8:30am and 2:30pm.
 `cd /Users/marshall.krassenstein/desktop/random_projects/run_sleepy_apps`: Change directory to where the script is located.
 `bash run_sleepy_refresh.sh`: Execute the bash script.
-`> /tmp/throwaway.log 2>/tmp/webapp_refresh.log`: Redirect the output to a log file in case I want to check it later.
+`> /tmp/throwaway.log 2>/tmp/web app_refresh.log`: Redirect the output to a log file in case I want to check it later.
 
 And just like that, we have a script that keeps our web applications up and running without having to pay for a server! Hurray!
 

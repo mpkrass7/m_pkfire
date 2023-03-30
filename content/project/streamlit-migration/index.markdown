@@ -4,7 +4,7 @@ author: Marshall Krassenstein
 date: '2021-09-05'
 slug: streamlit-app
 categories: []
-tags: [python, webapp, migration, streamlit, geospatial]
+tags: [python, web app, migration, streamlit, geospatial]
 subtitle: ''
 summary: 'An app I built to explore migration in the United States'
 authors: []
@@ -18,7 +18,7 @@ projects: []
 ---
 
 
-At DataRobot, I had a project in collaboration with the office of Housing and Urban Development (HUD). They asked us to look at some form of movement data and tell them what where people were moving in the wake of Covid-19. At the time of the project, the 2020 census data had not yet been released, and finding where people were moving was nearly impossible without buying a large dataset. Saddened but still interested in migration patterns generally, I decided to grab the US migration data from ipums from 2019 and build a Streamlit app out of it. Hopefully I'll get a chance to update it once 2020 census data comes out!
+At DataRobot, I had a project in collaboration with the office of Housing and Urban Development (HUD). They asked us to look at some form of movement data and tell them what where people were moving in the wake of Covid-19. At the time of the project, the 2020 census data had not yet been released, and finding where people were moving was nearly impossible without buying a large dataset. Saddened but still interested in migration patterns generally, I decided to grab the US migration data from *ipums* from 2019 and build a Streamlit app out of it. Hopefully I'll get a chance to update it once 2020 census data comes out!
 
 
 <!-- ![Migration App](migration_demo.gif) -->

@@ -4,7 +4,7 @@ author: R package build
 date: '2021-09-18'
 slug: pokemon-db
 categories: []
-tags: [R, shiny, webapp, PCA]
+tags: [R, shiny, web app, PCA]
 subtitle: ''
 summary: 'An app I built to show users Persistent Storage in Shiny.'
 authors: [Marshall Krassenstein]
@@ -24,9 +24,9 @@ As a result of my foray into persistent data storage, however, I decided to make
 
 ![Persistent Storage](poke_shiny1.gif)
 
-As shown above, the application allows users to pick there favorite Pokemon among 6 generations, and store it in a Postgre SQL database. I love coming back to this app from time to time because every month or so, I see one or two new submissions. I don't know where people went to find this app but I find it certainly makes me happy ;). 
+As shown above, the application allows users to pick there favorite Pokemon among 6 generations, and store it in a Postgres SQL database. I love coming back to this app from time to time because every month or so, I see one or two new submissions. I don't know where people went to find this app but I find it certainly makes me happy ;). 
 
-In addition to the database piece I have a pretty pithy analysis page that uses Principal Component Analysis to put Pokemon on a two-dimensional plane for some directional comparison. Ever wonder how similar Psyduck is to Bulbasaur? Try looking at the tab marked 'analysis'. Getting the Pokemon images to dynamically render on my Plotly object is still one of my favorite visualization accomplishments to date.
+In addition to the database piece I have a pretty pithy analysis page that uses Principal Component Analysis to put Pokemon on a two-dimensional plane for some directional comparison. Ever wonder how similar Psyduck is to Bulbasaur? Try looking at the tab marked 'analysis'. Getting the Pokemon images to dynamically render on my plotly object is still one of my favorite visualization accomplishments to date.
 
 View the app below or follow the link [here](https://marshallp.shinyapps.io/ShinyPokemonDB/). Don't forget to submit your favorite Pokemon!
 

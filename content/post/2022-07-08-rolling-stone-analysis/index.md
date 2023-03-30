@@ -848,7 +848,7 @@ plot_popularity_against_track_rank(df, outpath="images/track_pop.png")
 
 ![track_pop](images/track_pop.png)
 
-Dammnnn, Kate Buschhhh so far up there. And we see that there is no real link between current popularity and ranking. I mean, fair. Now I'd like to do something similar with artists in general. Below I explore the rank against popularity at the artist level by grabbing the best ranked song for each artist and compare it against the artist level popularity.
+Dammnnn, Kate Busch so far up there. And we see that there is no real link between current popularity and ranking. I mean, fair. Now I'd like to do something similar with artists in general. Below I explore the rank against popularity at the artist level by grabbing the best ranked song for each artist and compare it against the artist level popularity.
 
 
 ```python

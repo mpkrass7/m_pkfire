@@ -334,7 +334,7 @@ sns.displot(df, x='Attrition', shrink = .8)
 
 ## EDA
 
-I first look at some features that might be important in the dataset
+I first look at some features that might be important in the dataset.
 
 ### Attrition by Age
 
@@ -426,11 +426,9 @@ g.despine(trim=True)
 ![png](./index_12_3.png)
     
 
-
 ### Gender and Marital Status
 
 Single men and women are more likely to leave the company but age may be a confounder. Men are slightly more likely to leave than women.
-
 
 
 ```python
@@ -447,9 +445,6 @@ sns.heatmap(
     data=df_heat
 )
 
-# sns.heatmap(
-#     data=df[['Gender', 'MaritalStatus', ]]
-#     )
 ```
 
 
@@ -506,7 +501,6 @@ g.map_diag(sns.histplot, kde=True)
 ![png](./index_16_3.png)
     
 
-
 Many features are correlated although no features have a higher correlation than 0.3 or less than -0.1.
 
 
@@ -543,7 +537,6 @@ sns.heatmap(corr,  cmap=cmap, vmax=.3, center=0,
 ## Predictive Analytics - LDA
 
 Linear Discriminant Analysis (LDA) is a feature reduction method for data with discrete classes. It is like PCA except that it takes advantage of information about the classification in the training data. It projects data into fewer dimensions by maximizing both the mean distance between the median data point of each class and minimizing the "spread" within each class.
-
 
 ```python
 # Drop columns with no information
@@ -1338,7 +1331,7 @@ The test accuracy is actually even higher than the cross validated training accu
 
 ### Visualize in one dimension
 
-The accuracy is pretty high even reducing everything down to just one dimension which is pretty impressive. I show with some jitter below
+The accuracy is pretty high even reducing everything down to just one dimension which is pretty impressive. I show with some jitter below.
 
 
 ```python
@@ -1408,18 +1401,6 @@ sm.confusion_matrix(test_xgb_preds, testY)
 print(f'Test Accuracy: {round(sm.accuracy_score(test_xgb_preds, testY),3)*100}%')
 ```
 
-    /Users/marshallkrassenstein/anaconda3/lib/python3.7/site-packages/xgboost/sklearn.py:892: UserWarning:
-    
-    The use of label encoder in XGBClassifier is deprecated and will be removed in a future release. To remove this warning, do the following: 1) Pass option use_label_encoder=False when constructing XGBClassifier object; and 2) Encode your labels (y) as integers starting with 0, i.e. 0, 1, 2, ..., [num_class - 1].
-    
-
-
-    [19:46:55] WARNING: /Users/travis/build/dmlc/xgboost/src/learner.cc:1061: Starting in XGBoost 1.3.0, the default evaluation metric used with the objective 'binary:logistic' was changed from 'error' to 'logloss'. Explicitly set eval_metric if you'd like to restore the old behavior.
-
-
-
-
-
     XGBClassifier(base_score=0.5, booster='gbtree', colsample_bylevel=1,
                   colsample_bynode=1, colsample_bytree=1, gamma=0, gpu_id=-1,
                   importance_type='gain', interaction_constraints='',
@@ -1475,7 +1456,6 @@ fig.set_size_inches(10, 10)
 ```python
 lda_features
 ```
-
 
 
 
@@ -1763,4 +1743,4 @@ lda_features
 
 
 
-Interestingly LDA has the Monthly and hourly rates as having some of the lowest feature importances while XGBoost has them among the highest
+Interestingly LDA shows the monthly and hourly rates having some of the lowest feature importance while XGBoost has them among the highest.

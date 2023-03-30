@@ -336,7 +336,7 @@ stronger_data
 
 
 
-I plugged in the song IDs for the full list and managed to extract a bunch of new data for all but 14 of them! Certainly glad Apple maintained some kind of backward compatability when they shifted over to a new music service.
+I plugged in the song IDs for the full list and managed to extract a bunch of new data for all but 14 of them! Certainly glad Apple maintained some kind of backward compatibility when they shifted over to a new music service.
 
 
 ```python
