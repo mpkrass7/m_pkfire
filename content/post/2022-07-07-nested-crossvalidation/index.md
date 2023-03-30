@@ -79,7 +79,7 @@ Obviously, this was a bit of a silly hypothesis. But what I hope it illustrates 
 
 ### Enter Nested CV
 
-Cross validation suffers from exactly the same problem we saw in the example above. If it is used to decide between model hyperparameters, it shouldn't also be used to evaluate the winning model. This is exactly what you can read in the [scikit-learn documentaiton](https://scikit-learn.org/stable/auto_examples/model_selection/plot_nested_cross_validation_iris.html), which also explains what Nested Cross validation is for:
+Cross validation suffers from exactly the same problem we saw in the example above. If it is used to decide between model hyperparameters, it shouldn't also be used to evaluate the winning model. This is exactly what you can read in the [scikit-learn documentation](https://scikit-learn.org/stable/auto_examples/model_selection/plot_nested_cross_validation_iris.html), which also explains what Nested Cross validation is for:
 
 *"..Choosing the parameters that maximize non-nested CV biases the model to the dataset, yielding an overly-optimistic score... Nested cross validation (CV) is often used to train a model in which hyperparameters also need to be optimized. Nested CV estimates the generalization error of the underlying model and its (hyper)parameter search."*
 
