@@ -42,7 +42,7 @@ We had a couple other bells and whistles in there too, like a way to submit new 
 
 ### Post Hackathon
 
-My company has marketed our project pretty heavily since we presented. They even made me take away the cookie monster stuff and make a more professional demo video of it. You can watch both and tell me which one you like better. 
+My company has marketed our project pretty heavily since we presented. They even made me take away the cookie monster stuff and make a more professional demo video of it, which is on the DataRobot Youtube Channel. You can watch both and tell me which one you like better. 
 
 RFP Monster (My Hackathon Video)
 [![RFP Monster](./rfp-monster-video.jpg)](https://www.youtube.com/watch?v=a1UNpZVLsgA "My Hackathon RFP Monster")
@@ -52,4 +52,4 @@ GenAI and Predictive AI Demo (The professional looking one)
 
 ### Credits
 
-Cynthia did a lot of the hand labeling for or audit model and Kyle implemented a neat re-querying strategy. A special shout out to John who asked to join my team as an intern (we'd never spoken before) and did bunch of the backend work with our vector database and alternative LLMs. Thanks teammates! 
+Cynthia did a lot of the hand labeling for our audit model and Kyle implemented a neat re-querying strategy. A special shout out to John who asked to join my team as an intern and did a bunch of backend work with our vector database and alternative LLMs. Thanks teammates! 
