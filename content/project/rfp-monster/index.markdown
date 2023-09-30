@@ -50,3 +50,6 @@ RFP Monster (My Hackathon Video)
 GenAI and Predictive AI Demo (The professional looking one)
 [![GenAI + Predictive AI](./rfp-audit-video.jpg)](https://www.youtube.com/watch?v=btsGOipo5Xo, "GenAI + Predictive AI")
 
+### Credits
+
+Cynthia did a lot of the hand labeling for or audit model and Kyle implemented a neat re-querying strategy. A special shout out to John who asked to join my team as an intern (we'd never spoken before) and did bunch of the backend work with our vector database and alternative LLMs. Thanks teammates! 
