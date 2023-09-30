@@ -6,7 +6,7 @@ slug: rfp-monster
 categories: []
 tags: [python, llm, machine-learning, slackbot, streamlit]
 subtitle: ''
-summary: 'An app I built to automate answering your RFPs with Langchain and FAISS'
+summary: 'An app I built to automate answering RFPs with Langchain and FAISS'
 authors: [Marshall Krassenstein]
 lastmod: '2023-09-29T13:33:09-04:00'
 featured: no
