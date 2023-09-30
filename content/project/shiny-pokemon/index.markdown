@@ -1,6 +1,6 @@
 ---
 title: Two Way Analytics with Shiny and Postgres SQL
-author: R package build
+author: Marshall Krassenstein
 date: '2021-09-18'
 slug: pokemon-db
 categories: []

@@ -22,9 +22,9 @@ At least as of September 2021 when I built this website, I worked at DataRobot (
 
 Anyway, at DataRobot I work as a **Customer Facing Data Scientist**. My job is essentially to show prospective clients our product, answer technical questions and generally be a passenger on the company hype train.
 
-One dataset we all work with is called the 'Lending Club' dataset. Lending club is this micro-lending platform where a person can apply for a loan and individual people can choose to finance the loan in return for interest. Ideally, you want to know if the loan will be paid back or else you would lose money rather than gain money. Thus, the dataset makes for a great Proof of Concept for machine learning.
+One dataset we all work with is called the 'Lending Club' dataset. Lending club is this micro-lending platform where a person can apply for a loan and individual people can choose to finance the loan in return for interest. Ideally, you want to know if the loan will be paid back or else you would lose money rather than gain money. And the dataset has lots of feature types, missing data, etc.. Thus, the dataset makes for a great "Proof of Value" for the things DataRobot does well..
 
-I whipped up the dashboard below to show for client demos. While it's neither my most sophisticated nor favorite creation, I think it looks and it shows the output of the models I built. 
+I whipped up the dashboard below to show for client demos. While it's neither my most sophisticated nor favorite creation, I think it looks clean and it shows the output of the models I built. 
 
 Try it below or give it a spin [here](https://public.tableau.com/app/profile/marshall3251/viz/LendingClubDefaultPredictor-DataRobot/MainDash) (it's better).
 
