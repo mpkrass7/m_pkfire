@@ -17,18 +17,13 @@ image:
 projects: []
 ---
 
-### 🚨 Advance Warning 🚨
-I neither have code nor a cute app app for you to play with on this post! I did build an app, I just don't think my company will let me share it right now. Instead you get a blog post and a couple of Youtube videos. I talk like the 🍪 *cookie monster* 🍪 in one of them though so give it a look if you'd like!
-
-### Background
-
-In our last company Hackathon, my team won second place where the reward was a bunch of pats on the back and a little bit of prize money. I could wax poetic about other hackathon's I've done but I'm proud enough of this one to write about it. It was the first time I led our team on everything from software development to the business presentation. Our project was called the RFP Monster and our project vision was this:
+In our last company Hackathon, my team won second place where the reward was a bunch of pats on the back and a little bit of prize money. This was not the first hackathon I've done nor was it the first where my team placed in the top three but I'm proud enough of this one to write about it. It was the first time I led our team on everything from software development to the business presentation. Our project was called the RFP Monster and our vision was this:
 
 "**Win more deals** by enabling our **sales force** to answer lots of questions **better** and **faster**. That’s it."
 
 ### What is an RFP?
 
-RFP stands for 'Request for Proposal'. They are questionnaires that companies send out to prospective vendors when they're considering buying software or a service. At a company that sells fairly sophisticated Machine Learning software, answering these is a not a trivial task. I've seen documents containing upwards of 200 questions (seriously) and answering them thoroughly requires knowledge of pretty much every part of our company. Besides the nitty gritty details of how it handles machine learning problems, there will be questions about our architecture, security, downtime, pricing, and more. They are annoying hoops jump through and involve a lot of people from different departments. I can't imagine who on the customer side has to read through all of these responses. Yet they are a necessary evil. Many prospects won't talk to you unless you fill them out.
+RFP stands for 'Request for Proposal'. They are questionnaires that companies send out to prospective vendors when they're considering buying software or a service. At a company that sells fairly sophisticated Machine Learning software, answering these is a not a trivial task. I've seen documents containing upwards of 200 questions (seriously) and answering them thoroughly requires knowledge of pretty much every part of our company. Besides the nitty gritty details of how it handles machine learning problems, there are often questions about our architecture, security, downtime, and pricing among other topics. They are annoying hoops jump through and answering them well involves people from a bunch of different departments. I can't imagine who on the customer side would actually read through all of the responses. Yet they are a necessary evil. Many prospects won't talk to you unless you fill them out.
 
 ### The Solution
 
@@ -42,7 +37,8 @@ We had a couple other bells and whistles in there too, like a way to submit new 
 
 ### Post Hackathon
 
-My company has marketed our project pretty heavily since we presented. They even made me take away the cookie monster stuff and make a more professional demo video of it, which is on the DataRobot Youtube Channel. You can watch both and tell me which one you like better. 
+My company marketed our project pretty heavily since we presented. They even made me take away the cookie monster stuff and make a more professional demo video of it, which is on the DataRobot Youtube Channel. You can watch both and tell me which one you like better. 
+
 
 RFP Monster (My Hackathon Video)
 [![RFP Monster](./rfp-monster-video.jpg)](https://www.youtube.com/watch?v=a1UNpZVLsgA "My Hackathon RFP Monster")
