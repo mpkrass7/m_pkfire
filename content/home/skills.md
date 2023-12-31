@@ -37,9 +37,9 @@ feature:
   icon_pack: emoji
   name: Climbing
 - description: 
-  icon: ":cat2:"
+  icon: ":dog:"
   icon_pack: emoji
-  name: Petting my Cat
+  name: Having a dog
 
 
 # Uncomment to use emoji icons.

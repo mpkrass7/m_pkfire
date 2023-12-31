@@ -8,7 +8,7 @@ tags: [python, llm, machine-learning, slackbot, streamlit]
 subtitle: ''
 summary: 'An app I built to automate answering RFPs with Langchain and FAISS'
 authors: [Marshall Krassenstein]
-lastmod: '2023-09-29T13:33:09-04:00'
+lastmod: '2023-12-31T13:33:09-04:00'
 featured: no
 image:
   caption: ''
@@ -17,9 +17,17 @@ image:
 projects: []
 ---
 
+### Update
+
+I found out my project was featured in Wired magazine in October! Check out the article [here](https://www.wired.com/story/generative-ai-chatgpt-is-coming-for-sales-jobs/).
+
+
+## Introduction
+
 In our last company Hackathon, my team won second place where the reward was a bunch of pats on the back and a little bit of prize money. This was not the first hackathon I've done nor was it the first where my team placed in the top three but I'm proud enough of this one to write about it. It was the first time I led our team on everything from software development to the business presentation. Our project was called the RFP Monster and our vision was this:
 
 "**Win more deals** by enabling our **sales force** to answer lots of questions **better** and **faster**. That’s it."
+
 
 ### What is an RFP?
 
