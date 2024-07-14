@@ -34,7 +34,7 @@ experience:
         Responsibilities include:
         
         * Analysing
-        * Modelling
+        * Modeling
         * Deploying
         * Demos
         
