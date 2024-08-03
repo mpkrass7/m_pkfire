@@ -34,9 +34,16 @@ There are a couple of variables I define in this notebook to help with the basic
 
 
 
-### Step 1: Define a small dataclass
+### Step 1: Define a small dataclass and some helper functions for our simulation
 Below I define a student who only has one attribute: their probability of retention. In the simulation, good students get a higher probability of retention than bad students.
 
+Next I define a helper function to build all the students who join the class each week, where some are good and some are bad. 
+
+I further define my function to simulate retention week by week.
+
+<details>
+
+<summary>🔍 Click 4 Code</summary>
 
 ```python
 from dataclasses import dataclass
@@ -62,15 +69,8 @@ class Student:
     def is_retained(self) -> float:
         """Returns whether the student is retained in a given week."""
         return np.random.rand() < self.p_retained
-```
-
-### 2. Define helper functions for our simulation
-Next I define a helper function to build all the students who join the class each week, where some are good and some are bad. 
-
-I further define my function to simulate retention week by week.
 
 
-```python
 def create_new_students(
     p_good_student: float,
     p_retention_good: float,
@@ -175,10 +175,17 @@ def simulate_retention(
     return data
 ```
 
-## 3. Plot a few simulations and observe
+</details>
+
+## 2. Plot a few simulations and observe
 
 Below I run four simulations over 52 weeks and plot the results, highlighting the moving average retention. Coinciding with the hypothesis that retention rate should increase over time, we see that three out of four charts below increase for the parameters I set, at least in the first few weeks. Interestingly none of them level off and remain steady. Some even drop down over time, sometimes substantially, due to the randomness of the simulation. Ceteris paribus, weekly retention is a highly variable measure, even averaged over time.
 
+![initial_simulations](images/four_simulations.png)
+
+<details>
+
+<summary>🔍 Click 4 Code</summary>
 
 ```python
 from itertools import product
@@ -225,12 +232,16 @@ fig.legend(["Retention", "Moving Average Retention"], loc="lower right")
 plt.savefig("images/four_simulations.png")
 ```    
 
+</details>
 
-![initial_simulations](images/four_simulations.png)
-
-### 4. Make lots of simulations
+### 3. Make lots of simulations
 Since the original simulation had high variability, I thought it would help to run more simulations so that I could see the average and standard deviation of the retention rate over time. In the initial parameters I set, the retention rate increases by roughly 10% in the first 10 weeks. Noting the variability observed above we can see the standard deviation is fairly far from the average. For example, a moving average retention rate of 60% is expected to vary between 50% and 70% within 1 standard deviation.
 
+![aggregate_simulation](images/aggregate_simulation.png)
+
+<details>
+
+<summary>🔍 Click 4 Code</summary>
 
 ```python
 
@@ -329,12 +340,11 @@ all_sim_data
 plot_simulations(all_sim_data)
 ```
 
-![aggregate_simulation](images/aggregate_simulation.png)
+</details>
 
-### 5. Make lots of simulations again but try some different parameters.
+### 4. Make lots of simulations again but try some different parameters.
 
 Our graph above is derived based on assumptions (This whole notebook is a mess of random assumptions). Still, it is worth seeing how the chart varies with some different scenarios in mind. I grid searching across more than two dimensions is cumbersome, so I add four scenarios and give them each a name. Then I define one more function for plotting my results.
-
 
 ```python
 parameters = [
@@ -371,6 +381,9 @@ parameters = [
 
 ```
 
+<details>
+
+<summary>🔍 Click 4 Code</summary>
 
 ```python
 def plot_averaged_simulation(data: pd.DataFrame, ax: plt.Axes, label: str):
@@ -403,12 +416,20 @@ def plot_averaged_simulation(data: pd.DataFrame, ax: plt.Axes, label: str):
     ax.set_title(label)
 ```
 
+</details>
+
 In all four scenarios, averaged across 50 runs, the general outcome is the same: moving average retention increases over time before leveling off. How that trend shows itself is different though not completely surprising across all of the scenarios.
 - More good students: The retention rate levels off in half the time.
 - Good students are really dedicated: The retention rate levels off at a much higher level over more time and stays high. In this scenario, tenure has the greatest impact on retention rate. This scenario feels like the most realistic one to me. At a 95% chance of staying each week, we can do the math and find that after 14 weeks, there is a roughly 50% chance that a given dedicated student will have left, which feels fair. 
 - Bad students aren't so bad: The retention rate doesn't increase much over (e.g. it matters less what your portfolio consists of).
 - Less new students per week: The retention rate levels off more slowly.
 
+![aggregate_simulations](images/four_aggregate_simulations.png)
+
+
+<details>
+
+<summary>🔍 Click 4 Code</summary>
 
 ```python
 np.random.seed(42)
@@ -432,8 +453,7 @@ for i, j in product(range(2), range(2)):
 fig.legend(["Retention", "Moving Average Retention"], loc="lower right")
 plt.savefig("images/four_aggregate_simulations.png")
 ```
-
-![aggregate_simulations](images/four_aggregate_simulations.png)
+</details>
 
 ### Conclusion:
 
