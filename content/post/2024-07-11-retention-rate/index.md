@@ -18,9 +18,9 @@ projects: []
 
 ## Background
 
-I reconnected with a friend of mine from high school last week. It was the first time we had seen each other in over 10 years. Writing that tempts me to wax poetic about the bizarre flow of time (it goes fast). The goal of my post is not to pontificate on the undulations of our lives but rather to do analysis. 
+I reconnected with a friend of mine from high school last week. It was the first time we had seen each other in over 10 years. Writing that tempts me to wax poetic about the bizarre flow of time (it goes fast). Let's put all things existential to the side for a few minutes. The goal of this post is not to pontificate on the undulations of our lives but rather to do analysis.
 
-Here is the situation: my friend started a new job teaching music lessons a few months ago, and she asked me to help her with a problem she was having. One of the KPIs, or Key Performance Indicators for people who have not worked in a cubicle, her managers use to assess their employees is called *retention rate*. They measure retention each week by dividing the number of students who return to class the following week by the number of students who attended the class the previous week. They take a moving average of this rate and use it to decide what to pay their employees. Having only been at the company for a few months, she wondered if her short tenure had to do with her low retention rate. The hypothesis was that working at the same place for longer would let the instructor build up a portfolio of 'dedicated students'. When the tutor's portfolio consists almost entirely of dedicated students, the students are less likely to churn, thus making retention high.
+Here is the situation: my friend started a new job teaching music lessons a few months ago, and she asked me to help her with a problem she was having with her performance. One of the KPIs, or Key Performance Indicators for people who have not worked in a cubicle, her managers use to assess their employees is called *retention rate*. They measure retention each week by dividing the number of students who return to class the following week by the number of students who attended class the previous week. They take a moving average of this rate and use it to decide what to pay their employees. Having only been at the company for a few months, she wondered if her short tenure had to do with her low retention rate. The hypothesis was that working at the same place for longer would let the instructor build up a portfolio of 'dedicated students'. When the tutor's portfolio consists almost entirely of dedicated students, the students are less likely to churn, thus making retention high.
 
 We therefore theorized that retention should naturally increase over time, but we weren't sure if we were right or by how much. In this notebook, I plug in a few student retention probabilities and simulate the retention rate over time. I do this over multiple runs to see if, holding all else constant, the retention rate naturally increases over time or not.
 
@@ -32,18 +32,20 @@ There are a couple of variables I define in this notebook to help with the basic
 - `maximum_students_in_portfolio`: The maximum number of students a teacher can have in a given week.
 - `weeks`: The number of weeks to simulate.
 
+> :warning: **Caveat**: The above variables should indicate that this is a highly simplified simulation.
 
+I hope a number of caveats come into any reader's head about what makes an experiment like this different from real life. Among others factors, the time of year, instructor's experience, changing company policies, and more complex characteristics among students play roles in retention rate. Remember, our goal is to ask a purely logical question: if some students are naturally more likely to churn than others, will an instructors retention rate naturally increase over time?
 
 ### Step 1: Define a small dataclass and some helper functions for our simulation
 Below I define a student who only has one attribute: their probability of retention. In the simulation, good students get a higher probability of retention than bad students.
 
-Next I define a helper function to build all the students who join the class each week, where some are good and some are bad. 
+Next I define a helper function to build all the students who join the class each week, where some are good and some are bad.
 
 I further define my function to simulate retention week by week.
 
 <details>
 
-<summary>🔍 Click 4 Code</summary>
+<summary>🔍 Click for Code</summary>
 
 ```python
 from dataclasses import dataclass
@@ -179,13 +181,13 @@ def simulate_retention(
 
 ## 2. Plot a few simulations and observe
 
-Below I run four simulations over 52 weeks and plot the results, highlighting the moving average retention. Coinciding with the hypothesis that retention rate should increase over time, we see that three out of four charts below increase for the parameters I set, at least in the first few weeks. Interestingly none of them level off and remain steady. Some even drop down over time, sometimes substantially, due to the randomness of the simulation. Ceteris paribus, weekly retention is a highly variable measure, even averaged over time.
+Below I run four simulations over 52 weeks and plot the results, highlighting the moving average retention. Coinciding with the hypothesis that retention rate should increase over time, we see that three out of four charts below increase for the parameters I set, at least in the first few weeks. Interestingly none of them level off and remain steady. Some even drop down over time, sometimes substantially, due to the randomness of the simulation. Ceteris paribus, weekly retention is a *highly variable measure*, even averaged over time.
 
 ![initial_simulations](images/four_simulations.png)
 
 <details>
 
-<summary>🔍 Click 4 Code</summary>
+<summary>🔍 Click for Code</summary>
 
 ```python
 from itertools import product
@@ -235,13 +237,13 @@ plt.savefig("images/four_simulations.png")
 </details>
 
 ### 3. Make lots of simulations
-Since the original simulation had high variability, I thought it would help to run more simulations so that I could see the average and standard deviation of the retention rate over time. In the initial parameters I set, the retention rate increases by roughly 10% in the first 10 weeks. Noting the variability observed above we can see the standard deviation is fairly far from the average. For example, a moving average retention rate of 60% is expected to vary between 50% and 70% within 1 standard deviation.
+Since the original simulation had high variability, I thought it would help to run more simulations so that I could see the average and standard deviation of the retention rate over time. In the chart below, I plot retention averaged over 50 runs. In the initial parameters I set, the retention rate increases by roughly 10% in the first 10 weeks. Coinciding with the variability observed in our earlier charts we can see the standard deviation is fairly far from the average. For example, someone with an expected retention rate 60% is actually expected to fall *somewhere* between 50% and 70%, at least within 1 standard deviation. The range would be far wider if we considered 2 standard deviations, which is a common measure of variability.
 
 ![aggregate_simulation](images/aggregate_simulation.png)
 
 <details>
 
-<summary>🔍 Click 4 Code</summary>
+<summary>🔍 Click for Code</summary>
 
 ```python
 
@@ -342,9 +344,9 @@ plot_simulations(all_sim_data)
 
 </details>
 
-### 4. Make lots of simulations again but try some different parameters.
+### 4. Make lots of simulations again but try some different parameters
 
-Our graph above is derived based on assumptions (This whole notebook is a mess of random assumptions). Still, it is worth seeing how the chart varies with some different scenarios in mind. I grid searching across more than two dimensions is cumbersome, so I add four scenarios and give them each a name. Then I define one more function for plotting my results.
+Our graph above is derived based on assumptions (This whole post is a mess of random assumptions). Still, it is worth seeing how the chart varies with some different scenarios in mind. Grid searching across more than two dimensions is cumbersome, so below I instead add four scenarios and give them each a name. Then I define one more function for plotting my results.
 
 ```python
 parameters = [
@@ -378,12 +380,11 @@ parameters = [
     },
 ]
 
-
 ```
 
 <details>
 
-<summary>🔍 Click 4 Code</summary>
+<summary>🔍 Click for Code</summary>
 
 ```python
 def plot_averaged_simulation(data: pd.DataFrame, ax: plt.Axes, label: str):
@@ -418,18 +419,18 @@ def plot_averaged_simulation(data: pd.DataFrame, ax: plt.Axes, label: str):
 
 </details>
 
-In all four scenarios, averaged across 50 runs, the general outcome is the same: moving average retention increases over time before leveling off. How that trend shows itself is different though not completely surprising across all of the scenarios.
-- More good students: The retention rate levels off in half the time.
-- Good students are really dedicated: The retention rate levels off at a much higher level over more time and stays high. In this scenario, tenure has the greatest impact on retention rate. This scenario feels like the most realistic one to me. At a 95% chance of staying each week, we can do the math and find that after 14 weeks, there is a roughly 50% chance that a given dedicated student will have left, which feels fair. 
-- Bad students aren't so bad: The retention rate doesn't increase much over (e.g. it matters less what your portfolio consists of).
-- Less new students per week: The retention rate levels off more slowly.
+In all four scenarios, averaged across 50 runs, the general outcome is the same: moving average retention increases over time before leveling off. How that trend shows itself is different though not particularly surprising across all of the scenarios.
+
+- **More good students:** The retention rate levels off in half the time.
+- **Good students are really dedicated:** The retention rate levels off at a much higher proportion over more time and stays high. In this scenario, tenure has the greatest impact on retention rate. This scenario feels like the most realistic one to me. At a 95% chance of staying each week, we can do the math and find that after 14 weeks, there is a roughly 50% chance that a given dedicated student will have left, which feels fair.
+- **Bad students aren't so bad:** The retention rate doesn't increase much over time (e.g. it matters less what your portfolio consists of).
+- **Less new students per week:** The retention rate levels off more slowly.
 
 ![aggregate_simulations](images/four_aggregate_simulations.png)
 
-
 <details>
 
-<summary>🔍 Click 4 Code</summary>
+<summary>🔍 Click for Code</summary>
 
 ```python
 np.random.seed(42)
@@ -455,7 +456,7 @@ plt.savefig("images/four_aggregate_simulations.png")
 ```
 </details>
 
-### Conclusion:
+### Conclusion
 
 From the above simulations I make two suggestions:
 
