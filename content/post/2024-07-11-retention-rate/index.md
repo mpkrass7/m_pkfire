@@ -237,7 +237,7 @@ plt.savefig("images/four_simulations.png")
 </details>
 
 ### 3. Make lots of simulations
-Since the original simulation had high variability, I thought it would help to run more simulations so that I could see the average and standard deviation of the retention rate over time. In the chart below, I plot retention averaged over 50 runs. In the initial parameters I set, the retention rate increases by roughly 10% in the first 10 weeks. Coinciding with the variability observed in our earlier charts we can see the standard deviation is fairly far from the average. For example, someone with an expected retention rate 60% is actually expected to fall *somewhere* between 50% and 70%, at least within 1 standard deviation. The range would be far wider if we considered 2 standard deviations, which is a common measure of variability.
+Since the original simulation had high variability, I thought it would help to run more simulations so that I could see the average and standard deviation of the retention rate over time. In the chart below, I plot retention averaged over 50 runs. In the initial parameters I set, the retention rate increases by roughly 10% in the first 10 weeks. Coinciding with the variability observed in our earlier charts we can see the standard deviation is fairly far from the average. For example, someone with an expected retention rate of 60% is actually expected to fall *somewhere* between 50% and 70%, at least within 1 standard deviation. The range would be far wider if we considered 2 standard deviations, which is a common measure of variability.
 
 ![aggregate_simulation](images/aggregate_simulation.png)
 

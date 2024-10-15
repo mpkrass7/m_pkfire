@@ -2,7 +2,7 @@
 title: "Why do you have to change your APIs on me Detroit?"
 author: Marshall Krassenstein
 date: '2024-10-02'
-slug: retention
+slug: detroit-911
 categories: []
 tags: [python, snowflake, aws, lambda, docker, data engineering, api]
 subtitle: ''
@@ -714,6 +714,10 @@ if __name__ == "__main__":
 
 Ok one last file for this section: The lambda function itself. This is a Python file which simply imports and runs the preceding two files. It's required for AWS Lambda to actually run the code.
 
+<details>
+
+<summary>🔍 Click for Code</summary>
+
 ```python
 import send_to_snowflake
 import retrieve_predictions
@@ -725,6 +729,8 @@ def lambda_handler(event, context):
     retrieve_predictions.main()
     return "Data sent to Snowflake"
 ```
+
+</details>
 
 ### The Dockerfile
 
@@ -775,6 +781,11 @@ CMD [ "lambda_function.handler" ]
 
 Ok that was a lot of code. But now that it's all here, the rest of the post is just a few commands to get everything running. The AWS docs helpfully provide a curl command for testing the lambda function (it worked) as well as code both to log into the AWS console and deploy the lambda function. I'll include my build and test commands below. The build command is a bit longer since I define a bunch of environment variables in the command itself.
 
+
+<details>
+
+<summary>🔍 Click for Code</summary>
+
 ```sh 
 # Build the docker image
 docker build --build-arg SNOWFLAKE_USERNAME=$SNOWFLAKE_USERNAME --build-arg SNOWFLAKE_PASSWORD$SNOWFLAKE_PASSWORD --build-arg DATAROBOT_API_TOKEN=$DATAROBOT_API_TOKEN --tag detroit_crime_pull --platform linux/amd64 .
@@ -782,6 +793,8 @@ docker build --build-arg SNOWFLAKE_USERNAME=$SNOWFLAKE_USERNAME --build-arg SNOW
 # Run the docker image
 docker run --platform linux/amd64 -p 9000:8080 --read-only detroit_crime_pull
 ```
+
+</details>
 
 ### Deploying the Lambda Function
 
