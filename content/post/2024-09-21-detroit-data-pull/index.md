@@ -1,12 +1,12 @@
 ---
 title: "Why do you have to change your APIs on me Detroit?"
 author: Marshall Krassenstein
-date: '2024-09-21'
+date: '2024-10-02'
 slug: retention
 categories: []
 tags: [python, snowflake, aws, lambda, docker, data engineering, api]
 subtitle: ''
-summary: 'Refreshing how I pull data from the Detroit 911 API'
+summary: 'Using Docker and AWS Lambdas to schedule calls to the Detroit 911 API'
 authors: [Marshall Krassenstein]
 featured: yes
 image:
