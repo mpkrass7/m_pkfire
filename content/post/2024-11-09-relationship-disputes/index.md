@@ -16,35 +16,29 @@ image:
 projects: []
 ---
 
-Here's a question to ask your friends: "Are you allowed to use ChatGPT to help you win arguments in your relationship?"
+Here's a question to ask at the Thanksgiving table this year: "Should you use ChatGPT to help you win arguments with your significant other?"
 
-A girl I'm dating sent me a funny [tweet](https://x.com/d_feldman/status/1846389401502224488?s=42) that comes from a reddit ["Am I the Asshole" thread](https://www.reddit.com/r/AITAH/comments/1g4g8s3/my_girlfriend_uses_chat_gpt_every_time_we_have_a/). Feel free to visit the links for the comment thread but the post itself is below:
+A girl I'm dating[^1] sent me a funny [tweet](https://x.com/d_feldman/status/1846389401502224488?s=42) that comes from a reddit ["Am I the Asshole" thread](https://www.reddit.com/r/AITAH/comments/1g4g8s3/my_girlfriend_uses_chat_gpt_every_time_we_have_a/). Feel free to visit the links for the comment threads but the post itself is below.
 
 ![AITAH](images/relationship-prompt.jpg)
 
-I found one reply in the twitter post to be amusing:
+I found one comment in the twitter post to be particularly inspiring.
 
-```txt
-ChatGPT always gonna agree with the user. The only solution here is for him to also use ChatGPT. And then the next evolution is those two ChatGPTs argue amongst themselves, and then return to the humans with a single binary verdict:
+"ChatGPT always gonna agree with the user. The only solution here is for him to also use ChatGPT. And then the next evolution is those two ChatGPTs argue amongst themselves, and then return to the humans with a single binary verdict:
 0: sleep on couch
-1: make-up sex
-```
+1: make-up sex"
 
-Now I did not feel like getting a verdict after N messages (though that would be an interesting for a future post), but I liked the idea of having an ChatGPT argue with itself, especially on the topic of using large lanugage models to help you win arguments.
+Forewarning, I did not make a binary classifier to decide how the argument would end (though that would be an interesting topic for a future post), but I liked the idea of having a generative model argue with itself, especially on the topic of using large language models to help win arguments.
 
-So today, I will show how I built the dispute bot so that you too, can have chatGPT argue with itself in all kinds of funny ways.
-
-> [!WARNING]
-> This post contains demonstrations of great emotion from LLMs and may be disturbing for some readers.
-> It proves *beyond doubt* that robots are capable of burning love and animosity.
-> Just kidding. It proves nothing, but watching them argue is extraordinarily entertaining
+So today, I will show how I built the relationship dispute bot so that you too can watch chatGPT argue with itself in all kinds of funny ways.
 
 ## Implementation
 
-If we want ChatGPT to argue with itself, we to talk to ChatGPT in Python world. Why Python as opposed to just using the GUI in the OpenAI website? Essentially, we want to have two conversations with an LLM that alternate between another. In these two conversations, we'll need to swap the system prompt and `chatMessage` order every message to make each LLM think it's talking to a user. In one, the system prompt tells the LLM to pretend it (she?) is the girl in a relationship. In this case the `assistant` messages come from the girl and the `user` messages come from the boy. In the other, it's the opposite. The system prompt tells the LLM to pretend to be the the boy in the relationship and the message stream has the `assistant` messages from the boy and the `user` messages from the girl. If that sounds at all confusing, worry not. In my humble opinion, my implementation was incredibly simple to the point where I made it object oriented just to be more interesting. I'll prove the implementation is easy step by step.
+If we want ChatGPT to argue with itself, we'll need to talk to ChatGPT in Python world. Why Python as opposed to just using the GUI on the OpenAI website? Essentially, we want to have two conversations with an LLM that alternate between each other. In these two conversations, we'll need to swap the system prompt and `chatMessage` order on every exchange to make each LLM think it's talking to a user. In one, the system prompt tells the LLM to pretend it (she?) is the girl in a relationship. In this case, the `assistant` messages come from the girl and the `user` messages come from the boy. In the other, it's the opposite. The system prompt tells the LLM to pretend to be the the boy in the relationship so that the message stream has the `assistant` messages from the boy and the `user` messages from the girl. If that sounds at all confusing, worry not. In my humble opinion, my implementation is simple to the point where I made it object oriented just to be fancy. I'll prove the implementation is easy step by step.
 
-### Step 1: 
-Super complicated: make sure you can access the OpenAI API
+### Step 1: Authentication
+
+Make sure you can access the OpenAI API.
 
 ```python
 import os
@@ -54,10 +48,11 @@ os.environ["OPENAI_API_KEY"] = "YOUR_API_KEY_HERE"
 client = OpenAI() # No need to pass credentials if your token is an environment variable 
 ```
 
-### Step 2:
-Ok obviously step 1 was not hard. This one is tougher, not from a coding perspective but simply from an experimentation perspective. We need to define the system prompts for both partners in our relationship. I think I spent more time working on this than any other part of this exercise. After a couple rounds of running the bot, here is what I ended up with for maximum argument quality. I also add a starting line and choose from a random list of boys and girls names for each partner.
+### Step 2: Motivating the conversation
 
-I strongly encourage reading the prompts. Besides explaining the situation as done in the AITAH post, I make both of them act more emotional. The girl has lines like "cry when necessary if it helps you win the argument" and the boy has lines like "You should get progressively less reasonable and more angry as the argument goes on". This is prompt engineering on display ladies and gentleman.
+Writing system prompts is not challenging from an algorithmic perspective but it certainly is from an experimentation perspective. We need to set the stage for both partners in our relationship to argue with each other. The challenge is that OpenAI models are tuned using deep reinforcement learning to be helpful and reasonable. We don't want OpenAI to be helpful and reasonable right now. We want to see a boy and a girl argue with exasperation and rage and tears. Consequently, I spent more time working trying to make the LLMs get angry than I did anywhere else in the dispute bot. Telling OpenAI that it was a boy or a girl in an argument was not enough. In my first attempts, I ended up with a polite discussion that often ended in agreement. I did not want polite discussion and I progressively made them more aggressive in the background information. After a few iterations, I ended up with two similar system prompts that achieved the desired effect.
+
+I strongly encourage reading the prompts. Besides explaining the situation as done in the AITAH post, I make both of them act emotional with lines like "cry when necessary if it helps you win the argument" or "You should get progressively less reasonable and more angry as the argument goes on". Classic prompt engineering.
 
 ```python
 
@@ -125,14 +120,15 @@ STARTING_LINE = {
 }
 ```
 
-### Step 3: Implement the bot
-The implementation for our both is below. The object is called `CouplesArgument` because initializing it creates a fresh argument between a new boy and a new girl. Walking through each of the methods:
+### Step 3: Implement the dispute
+
+With the background situation made, we're now ready to implement the robot argument. The object I made is called `CouplesArgument` because initializing it creates a fresh argument between a new boy and a new girl. I explain the methods below. If reading code about my implementation is not interesting, feel free to skip.
 
 - `__init__()`: Set some parameters. Insert boy name into prompt. Put first message into history.
-- `make_completion()`: Taken straight from the OpenAI Python SDK docs, send latest message and conversation history to the LLM to make a new completion. It invokes the `_get_message_history()` helper method, which is critical for alternating the system prompt and reversing who is considered the "user" and who is considered the "assistant" each message.
+- `make_completion()`: Taken straight from the OpenAI Python SDK docs, send latest message and conversation history to the LLM to make a new completion. Invoke a `_get_message_history()` helper method, which is important for alternating the system prompt and reversing who is considered the "user" and who is considered the "assistant" each message.
 - `print_response()`: Self explanatory
 - `__str__()`: Self explanatory if you understand basic dunder methods.
-- `run`: Actually run the dispute. Every time the boy or the girl argues their point, the user is asked if they want to continue the conversation (of course you do). The besides running the actual conversation, it also manages printing outputs and assigning roles based on conversation order.
+- `run`: Actually run the dispute. Every time the boy or the girl argues their point, ask user if they want to continue the conversation (of course you do). It also assigns roles based on conversation order.
 
 <details>
 
@@ -212,20 +208,19 @@ class CouplesArgument:
 
 </details>
 
-Short and sweet. Here's a free piece of wisdom. You know you're working on a fun project when you find yourself running it repeatedly, not just for the sake of improving it but out of genuine wonder for what you will see. This project accomplishes it for me. The threads between my robots are endlessly amusing.
-
-![Dispute bot snippet](./images/conversation_snippet.jpg)
-
-And here is me a quick gif of me running it live:
+Short and sweet. Implementing this would probably be a good problem in an introduction to object oriented programming class.
 
 ![Dipuste Bot Gif](./images/dispute_bot_gif.gif)
 
-### Step 4: Extend the object to make them to talk
+Free piece of wisdom: You know you're working on a fun project when you find yourself running it repeatedly, not just for the sake of improving it but out of genuine wonder for what you will see. I feel that sensation for this project. The threads between my robots are endlessly amusing.
+
+![Dispute bot snippet](./images/conversation_snippet.jpg)
+
+### Step 4: Extend the object to make them actually talk
 
 OpenAI doesn't just have text generation models. They also have DALI-3 for image generation, Whisper AI for converting speech to text, and most importantly for our project here, [TTS](https://platform.openai.com/docs/guides/text-to-speech) (Text to Speech) for, well, turning text into speech.
 
-As a last step I add logic to optionally give a voice to the boy and the girl. Doing this requires minimal change to our object. Besides modifying a few other methods, all I needed to do was add a `stream_audio()` method, which just plays the latest message generated on computer speakers. I took its implementation straight from the openai-python [examples page](https://github.com/openai/openai-python/blob/main/examples/audio.py#L14). I always make the male voice "fable" because the voice is British.
-
+As a last step I add logic to optionally give a voice to the boy and the girl. Adding text to speech requires minimal change to our object. Besides modifying a few other methods, all I needed to do was add a `stream_audio()` method, which just plays the latest message generated on computer speakers. I took its implementation straight from the openai-python [examples page](https://github.com/openai/openai-python/blob/main/examples/audio.py#L14). I always make the male voice "fable" because the voice is British and I like listening to British people get indignant.
 
 <details>
 
@@ -252,16 +247,15 @@ def stream_audio(self, response, is_boy: bool):
 
 </details>
 
-
 ### Step 5: Putting it all together and future applications
 
-As a final piece I display all of my code below, which you can feel free to adapt for your own use and run by typing `python run_dispute_bot.py` (or `python run_dispute_bot.py --use_audio`). I want to emphasize that this code should for the most part be very easy to change. Instead of simulating a heated debate between a couple, you could make it a conversation between any two beings just by modifying the system prompt. Some potentially weird but interesting ideas for conversations could be:
+I display all of my code below which you can run by installing two packages and typing `python run_dispute_bot.py` (or `python run_dispute_bot.py --use_audio`) into your favorite terminal. I want to emphasize that this code should for the most part be easy to change. Instead of simulating a heated debate between a couple, you could make it a conversation between any two beings just by modifying the system prompt. Some potentially weird but interesting ideas for conversations could be:
 
-- Two presidential candidates **cough** Trump and Kamala **cough** having an unruly debate.
+- Two presidential candidates having an unruly debate.
 - A deranged executive yelling at a disgruntled employee.
-- A horse and a cow having a polite conversation about their use to the human race.
+- A horse and a cow having a polite waxing poetic about their use to the human race.
 
-I might even make an app to do this for you at some point, but I'll leave that (as well as the binary indicator of Make Up Sex vs Sleep on the Couch) for another post. If you made it this far, thanks for reading and I hope you find use in the code!
+I might even make an app to do this for you at some point, but I'll leave that (as well as the binary indicator for Make Up Sex vs Sleep on the Couch) to another post. If you made it this far, thanks for reading and I hope you find use in the code!
 
 <details>
 
@@ -506,3 +500,5 @@ if __name__ == "__main__":
 ```
 
 </details>
+
+[^1]: Lauren is finishing her PhD and begged me to add her [google scholar page](https://scholar.google.com/citations?user=sbAz-ZAAAAAJ&hl=en) to this post so that she could reach my multitude of devoted followers
