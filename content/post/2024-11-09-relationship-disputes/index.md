@@ -18,7 +18,7 @@ projects: []
 
 Here's a question to ask at the Thanksgiving table this year: "Should you use ChatGPT to help you win arguments with your significant other?"
 
-A girl I'm dating[^1] sent me a funny [tweet](https://x.com/d_feldman/status/1846389401502224488?s=42) that comes from a reddit ["Am I the Asshole" thread](https://www.reddit.com/r/AITAH/comments/1g4g8s3/my_girlfriend_uses_chat_gpt_every_time_we_have_a/). Feel free to visit the links for the comment threads but the post itself is below.
+The girl I'm dating[^1] sent me a funny [tweet](https://x.com/d_feldman/status/1846389401502224488?s=42) that comes from a reddit ["Am I the Asshole" thread](https://www.reddit.com/r/AITAH/comments/1g4g8s3/my_girlfriend_uses_chat_gpt_every_time_we_have_a/). Feel free to visit the links for the comment threads but the post itself is below.
 
 ![AITAH](images/relationship-prompt.jpg)
 
@@ -125,10 +125,10 @@ STARTING_LINE = {
 With the background situation made, we're now ready to implement the robot argument. The object I made is called `CouplesArgument` because initializing it creates a fresh argument between a new boy and a new girl. I explain the methods below. If reading code about my implementation is not interesting, feel free to skip.
 
 - `__init__()`: Set some parameters. Insert boy name into prompt. Put first message into history.
-- `make_completion()`: Taken straight from the OpenAI Python SDK docs, send latest message and conversation history to the LLM to make a new completion. Invoke a `_get_message_history()` helper method, which is important for alternating the system prompt and reversing who is considered the "user" and who is considered the "assistant" each message.
+- `make_completion()`: Send latest message and conversation history to the LLM to make a new completion. Invoke a `_get_message_history()` helper method, which is important for alternating the system prompt and reversing who is considered the "user" and who is considered the "assistant" each message.
 - `print_response()`: Self explanatory
-- `__str__()`: Self explanatory if you understand basic dunder methods.
-- `run`: Actually run the dispute. Every time the boy or the girl argues their point, ask user if they want to continue the conversation (of course you do). It also assigns roles based on conversation order.
+- `__str__()`: Self explanatory if you understand basic Python dunder methods.
+- `run`: Run the dispute. Every time the boy or the girl argues their point, ask user if they want to continue the conversation (of course you do).
 
 <details>
 
@@ -501,4 +501,4 @@ if __name__ == "__main__":
 
 </details>
 
-[^1]: Lauren is finishing her PhD and begged me to add her [google scholar page](https://scholar.google.com/citations?user=sbAz-ZAAAAAJ&hl=en) to this post so that she could reach my multitude of devoted followers
+[^1]: Lauren is finishing her PhD and begged me to add her [google scholar page](https://scholar.google.com/citations?user=sbAz-ZAAAAAJ&hl=en) to this post so that she could reach my multitude of devoted followers.
