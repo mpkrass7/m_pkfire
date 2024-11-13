@@ -18,7 +18,7 @@ projects: []
 
 Here's a question to ask at the Thanksgiving table this year: "Should you use ChatGPT to help you win arguments with your significant other?"
 
-The girl I'm dating[^1] sent me a funny [tweet](https://x.com/d_feldman/status/1846389401502224488?s=42) that comes from a reddit ["Am I the Asshole" thread](https://www.reddit.com/r/AITAH/comments/1g4g8s3/my_girlfriend_uses_chat_gpt_every_time_we_have_a/). Feel free to visit the links for the comment threads but the post itself is below.
+My girlfriend[^1] sent me a [tweet](https://x.com/d_feldman/status/1846389401502224488?s=42) that comes from a reddit ["Am I the Asshole" thread](https://www.reddit.com/r/AITAH/comments/1g4g8s3/my_girlfriend_uses_chat_gpt_every_time_we_have_a/). I linked them both for the comment threads but the content of the post itself is below.
 
 ![AITAH](images/relationship-prompt.jpg)
 
@@ -30,7 +30,7 @@ I found one comment in the twitter post to be particularly inspiring.
 
 Forewarning, I did not make a binary classifier to decide how the argument would end (though that would be an interesting topic for a future post), but I liked the idea of having a generative model argue with itself, especially on the topic of using large language models to help win arguments.
 
-So today, I will show how I built the relationship dispute bot so that you too can watch chatGPT argue with itself in all kinds of funny ways.
+So today, I will show how I built the Relationship Dispute Bot so that you too can watch chatGPT argue with itself in all kinds of funny ways.
 
 ## Implementation
 
