@@ -1,5 +1,5 @@
 ---
-title: "Why do you have to change your APIs on me Detroit?"
+title: "Better automation infrastructure for 911 call forecasting"
 author: Marshall Krassenstein
 date: '2024-10-02'
 slug: detroit-911

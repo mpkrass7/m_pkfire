@@ -1,7 +1,7 @@
 ---
 title: "Retention involves a lot of luck"
 author: Marshall Krassenstein
-date: '2024-08-01'
+date: '2024-12-02'
 slug: retention
 categories: []
 tags: [python, retention, matplotlib, simulation]

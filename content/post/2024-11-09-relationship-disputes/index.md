@@ -6,7 +6,7 @@ slug: relationship-dipute-bot
 categories: []
 tags: [python, openai, llm, relationships]
 subtitle: ''
-summary: 'Watch ChatGPT progressively argue about using ChatGPT'
+summary: 'Reliably simulate an argument in a relationship about using ChatGPT to resolve disputes'
 authors: [Marshall Krassenstein]
 featured: yes
 image:
