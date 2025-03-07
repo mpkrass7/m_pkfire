@@ -30,7 +30,7 @@ In addition to the database piece I have a pretty pithy analysis page that uses 
 
 View the app below or follow the link [here](https://marshallp.shinyapps.io/2025PokemonAppShiny/). Don't forget to submit your favorite Pokemon!
 
-<iframe src="https://marshallp.shinyapps.io/ShinyPokemonDB/" width="1152" height="900px"></iframe>
+<iframe src="https://marshallp.shinyapps.io/2025PokemonAppShiny/" width="1152" height="900px"></iframe>
 
 #### Do you like Shiny and want persistent storage for free?
 
