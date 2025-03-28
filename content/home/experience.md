@@ -23,13 +23,21 @@ date_format: Jan 2006
 #   Leave `date_end` empty if it's your current employer.
 #   Begin multi-line descriptions with YAML's `|2-` multi-line prefix.
 experience:
+  - title: Solutions Architect
+    company: Databricks
+    location: Mountain View
+    company_url: https://www.databricks.com/'
+    date_start: '2025-03-17'
+    date_end: '2025-03-07'
+    description:
+
   - title: Data Scientist
     company: DataRobot
     company_url: ''
     company_logo: org-gc
     location: Boston
     date_start: '2021-01-01'
-    date_end: ''
+    date_end: '2025-03-07'
     description: |2-
         Responsibilities include:
         

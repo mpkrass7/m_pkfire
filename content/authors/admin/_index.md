@@ -1,5 +1,5 @@
 ---
-bio: Data Scientist at DataRobot. Likes running, climbing and smoothies
+bio: Solutions Architect at Databricks. Likes pickleball, staying active and smoothies
 education:
   courses:
   - course: MS Computational Analytics
@@ -16,9 +16,9 @@ interests:
 - Dabbling in Software Engineering
 
 organizations:
-- name: DataRobot
-  url: https://www.datarobot.com/
-role: Data Scientist
+- name: Databricks
+  url: https://www.databricks.com/
+role: Solutions Architect
 social:
 # - icon: envelope
 #   icon_pack: fas
