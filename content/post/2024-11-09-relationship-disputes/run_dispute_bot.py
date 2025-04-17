@@ -1,16 +1,24 @@
 import argparse
-import os
+import asyncio
+
 from pathlib import Path
 import random
 import sys
 import textwrap
 
-import openai
 from openai import OpenAI
-import pyaudio
 
-os.environ["OPENAI_API_KEY"] = os.environ["OPENAI_API_TOKEN_PERSONAL"]
+from openai import AsyncOpenAI
+from openai.helpers import LocalAudioPlayer
+from pydantic import BaseModel
+
+
+class ArgumentResponse(BaseModel):
+    response: str
+    tone: str
+
 client = OpenAI()
+asyncClient = AsyncOpenAI()
 
 PROMPT_GIRL = """
 Pretend that you are the woman in a relationship and you are having a dispute
@@ -121,7 +129,7 @@ class CouplesArgument:
         self.prompt_girl = prompt_girl.format(boy=boy, girl=girl)
         self.prompt_boy = prompt_boy.format(boy=boy, girl=girl)
         self.message_history = [starting_line]
-        self.client = client
+        self.client: OpenAI = client
         self.girl_voice = random.choice(["nova", "alloy", "shimmer"])
         self.boy_voice = random.choice(["fable"])  # "onyx", "echo", "fable"
         self.use_audio = use_audio
@@ -129,12 +137,13 @@ class CouplesArgument:
 
     def make_completion(self, is_boy: bool) -> str:
         history, system_prompt = self._get_message_history(is_boy)[-10:]
-        completion = self.client.chat.completions.create(
+        completion = self.client.beta.chat.completions.parse(
             model="gpt-4o",
             messages=[{"role": "system", "content": system_prompt}, *history],
             temperature=1.0,
+            response_format=ArgumentResponse
         )
-        return completion.choices[0].message.content
+        return completion.choices[0].message.parsed
 
     def _get_message_history(self, is_boy: bool) -> tuple[list[dict[str, str]], str]:
         history = self.message_history.copy()
@@ -160,21 +169,19 @@ class CouplesArgument:
         print(textwrap.fill(f"{role}: {response}\n"))
         print("\n")
 
-    def stream_audio(self, response, is_boy: bool):
+    async def stream_audio(self, response: str, tone: str, is_boy: bool):
 
         voice = self.boy_voice if is_boy else self.girl_voice
-        player_stream = pyaudio.PyAudio().open(
-            format=pyaudio.paInt16, channels=1, rate=24000, output=True
-        )
 
-        with openai.audio.speech.with_streaming_response.create(
-            model="tts-1",
+        async with asyncClient.audio.speech.with_streaming_response.create(
+            model="gpt-4o-mini-tts",
             voice=voice,
-            response_format="pcm",
             input=response,
+            instructions=f"Your tone should be {tone}.",
+            response_format="pcm",
         ) as response:
-            for chunk in response.iter_bytes(chunk_size=1024):
-                player_stream.write(chunk)
+            await LocalAudioPlayer().play(response)
+
 
     def run(self):
         i = 0
@@ -190,7 +197,8 @@ class CouplesArgument:
                 role = self.girl_name
                 self.print_response(role, response)
 
-            response = self.make_completion(is_boy=is_boy)
+            copmletion = self.make_completion(is_boy=is_boy)
+            response, tone = copmletion.response, copmletion.tone
 
             role = self.boy_name if is_boy else self.girl_name
             self.delete_last_line(i)
@@ -198,7 +206,7 @@ class CouplesArgument:
             i += 1
             self.add_message(role, response)
             if self.use_audio:
-                self.stream_audio(response, is_boy)
+                asyncio.run(self.stream_audio(response, tone, is_boy))
 
     @staticmethod
     def delete_last_line(i: int):
