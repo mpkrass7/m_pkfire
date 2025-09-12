@@ -1,9 +1,9 @@
 ---
-title: Conformal Inference for Machine Learning Regression Models
+title: Conformal Inference for Regression Models
 author: Marshall Krassenstein
 date: '2025-09-12'
 slug: conformal-inference
-summary: A walkthrough of conformal inference techniques for regression problems, including absolute and locally weighted conformal inference, with model logging and deployment using MLFlow on Databricks.
+summary: Put a prediction interval around any model you want with conformal inference! I walk through conformal inference techniques for regression problems, including absolute and locally weighted conformal inference, with model logging and deployment using MLFlow on Databricks.
 subtitle: ''
 categories: []
 authors: [Marshall Krassenstein]
@@ -21,9 +21,9 @@ projects: []
 ---
 
 
-In this post I walk through two conformal inference techniques in regression problems. Absolute conformal inference is a simple way to create consistent prediction intervals around point predictions that do not vary in width. Locally weighted conformal inference is more complex but has the added benefit that the prediction interval width varies with the uncertainty of the specific data point. 
+In this post I show how to put a prediction interval around any regression model you want using a technique called conformal inference. I walk through two conformal inference techniques in regression problems. Absolute conformal inference is a simple way to create consistent prediction intervals around point predictions that do not vary in width. Locally weighted conformal inference is more complex but has the added benefit that the prediction interval width varies with the uncertainty of the specific data point. 
 
-After showing how to build each technique, I follow the standard MLFlow pathways to log, register and deploy both models, allowing uncertainty quantification at scale. 
+After showing how to build each technique, I follow the standard MLFlow pathways to log, register and deploy both models onto Databricks, allowing uncertainty quantification at scale. 
 
 
 ## Motivation
@@ -34,10 +34,11 @@ With that, let's get started!
 
 ## Absolute Conformal Inference
 
-Absolute conformal inference is one of the easiest ways to make prediction intervals around arbitrary models. In this notebook, I generate data for a regression problem (the target is continuous), but this technique works with classification problems too! 
+Absolute conformal inference is one of the easiest ways to make prediction intervals around arbitrary models. In this post, I generate data for a regression problem (the target is continuous), but this technique works with classification problems too! 
 
 The idea is simple:
-0. Choose a coverage level you want. The coverage level is the percentage of predictions we want to fall in our prediction interval. In the code below, we use .9 for 90% coverage.
+
+0. Choose a coverage level you want. The coverage level is the percentage of predictions we want to fall in our prediction interval. In the code below, I use .9 for 90% coverage.
 1. Train your model
 2. Make predictions on a calibration dataset
 3. Compute the 90th quantile of the *absolute value* of the residuals
@@ -68,7 +69,7 @@ COVERAGE = 0.9  # Desired coverage level for prediction intervals
 ```
 
 
-First, let's ensure we have a schema to [register](https://docs.databricks.com/aws/en/mlflow/models) our model in Unity Catalog. 
+First, let's ensure we have a schema to [register](https://docs.databricks.com/aws/en/mlflow/models) our model in Unity Catalog. We don't have to use Databricks to use conformal inference, but if we do, Unity Catalog is a best practice for managing and governing our models.
 
 
 ```python
@@ -133,7 +134,7 @@ def split_data(
 ```
 
 
-We also need to define some functions to fit a model as well as calculate our quantiles. Below, you'll notice that we're not actually taking the quantile but rather taking the quantile plus a small penalty based on the size of our data. That is a way of quantifying that we have a sample of data rather than our entire population. 
+We also need to define some functions to fit a model as well as calculate our quantiles. Below, we take the quantile plus a small penalty based on the size of our data, which is a way of quantifying that we have a sample of data rather than an entire population. 
 
 
 ```python
@@ -159,7 +160,7 @@ def compute_residuals_and_quantile_absolute_conformal(
     X_cal: pd.DataFrame,
     y_cal: pd.DataFrame,
     coverage: float,
-) -> np.ndarray:
+) -> tuple[np.ndarray, float]:
     """Apply quantiles with sampling correction for absolute conformal inference"""
     y_cal_pred = model.predict(X_cal)
     residuals = y_cal.values.ravel() - y_cal_pred
@@ -168,7 +169,7 @@ def compute_residuals_and_quantile_absolute_conformal(
 ```
 
 
-A plot of the residuals and the prediction intervals will be helpful to show for this analysis.  It will help us verify our coverage guarantees.
+A plot of the residuals and the prediction intervals will be helpful to verify our coverage guarantees.
 
 
 ```python
@@ -182,7 +183,7 @@ def plot_output(
     quantile: float,
     interval_type: Literal["absolute", "locally_weighted"] = "absolute",
     filename: str = None,
-):
+) -> plt.Figure:
     """
     Plot histogram of residuals and prediction intervals
     1. Histogram of residuals with quantile lines
@@ -269,13 +270,9 @@ fig.show()
 
     Prediction interval width at coverage 0.9: 237.66
 
-
-
     
 ![png](images/absolute_conformal.png)
     
-
-
 
 Have you ever implemented a decision tree? The details are quite annoying though the bagging part to make it into a RandomForest is intuitive enough. Luckily, our knowledge of the internals doesn't matter. Our fitted model has the magical property of providing an upper and a lower bound without us needing to think about the internals of its implementation at all. 
 
@@ -316,7 +313,7 @@ fig.show()
 
 
 
-With minimal extra effort we have a model recorded and registered in the Unity Catalog. Let's verify that it is logged correctly by pulling predictions from it. I'll install uv first to make the package downloading really fast. Fair warning, this step might take a little while. I would not be mad if you skipped it.
+With minimal extra effort we have a model recorded and registered in the Unity Catalog. Let's verify that it is logged correctly by pulling predictions from it. I'll install uv first to make the package downloading faster. Fair warning, this step still takes a while. I would not be mad if you skipped it.
 
 
 ```python
@@ -329,12 +326,13 @@ mlflow.models.predict(absolute_conformal_model_info.model_uri, X_test.iloc[:5],e
 ```
 
 
-    {"predictions": [{"predictions": -62.49456839573047, "lower_bound": -181.3252100591293, "upper_bound": 56.336073267668354}, {"predictions": 77.14216171682605, "lower_bound": -41.68847994657277, "upper_bound": 195.9728033802249}, {"predictions": -221.1448521278587, "lower_bound": -339.9754937912575, "upper_bound": -102.31421046445989}, {"predictions": 81.57720943627886, "lower_bound": -37.25343222711996, "upper_bound": 200.40785109967769}, {"predictions": 56.432414083054994, "lower_bound": -62.39822758034383, "upper_bound": 175.2630557464538}
+    {"predictions": [{"predictions": -62.49456839573047, "lower_bound": -181.3252100591293, "upper_bound": 56.336073267668354}, {"predictions": 77.14216171682605, "lower_bound": -41.68847994657277, "upper_bound": 195.9728033802249}, {"predictions": -221.1448521278587, "lower_bound": -339.9754937912575, "upper_bound": -102.31421046445989}, {"predictions": 81.57720943627886, "lower_bound": -37.25343222711996, "upper_bound": 200.40785109967769}, {"predictions": 56.432414083054994, "lower_bound": -62.39822758034383, "upper_bound": 175.2630557464538}]}
 
+We can see our model is working as expected. Now let's move on to a more complex conformal inference technique.
 
 ## Locally Weighted Conformal Inference
 
-In this section, we move on to a more sophisticated conformal technique for prediction intervals: Locally weighted conformal inference. Locally weighted conformal inference is more involved than absolute conformal inference. 
+In this section, we follow a more sophisticated conformal technique for prediction intervals: Locally weighted conformal inference. Locally weighted conformal inference is more involved than absolute conformal inference. I borrow the technique from [Lei et al. 2018](https://arxiv.org/pdf/1604.04173) which is a great resource if you want to learn more about the theory behind conformal inference.
 
 0. Choose a coverage level you want. The coverage level is the percentage of predictions we want to fall in our prediction interval. In the code below, we use .9 for 90% coverage.
 1. Train your model
@@ -347,13 +345,13 @@ In this section, we move on to a more sophisticated conformal technique for pred
 
 Once done, you can deploy the model and enjoy prediction intervals with coverage guarantees. Locally weighted conformal inference is more complex than absolute conformal inference but comes with the great perk that the prediction interval width varies based on the uncertainty of the point prediction. Unlike absolute conformal inference, locally weighted conformal inference allows the range of values for one point prediction to be larger or smaller than the range of values for another point prediction. 
 
-
 To build our locally weighted conformal inference model, we can reuse some of the functions defined above. We need to change three things:
+
 1. Inference logic in our mlflow model
 2. Fit a model to predict residuals in addition to our original model
 3. Change how we compute our quantile
 
-
+First lets change how our mlflow works so that it follows step 7 above.
 
 ```python
 LOCALLY_WEIGHTED_CONFORMAL_MODEL = "locally_weighted_conformal_model"
@@ -393,9 +391,7 @@ Fitting our two models before computing a quantile leaves us in a little bit of 
 
 Now we need two models. Which dataset should be used to train the second one? If we want our residual predictions to be realistic it doesn't make sense to use in-sample data, which initially points us to training our second model on our calibration dataset. But then by extension, when we calculate the quantile of residuals scaled by the predicted residuals, we'd have to use our test set to calculate our quantile. Do we need a fourth dataset now to plot outputs and prove our coverage guarantees? 
 
-From reading the literature, I could [not find specific detail](https://arxiv.org/pdf/1604.04173) on how we should split this up. An implementation I followed from [Kaggle](https://www.kaggle.com/code/carlmcbrideellis/locally-weighted-conformal-regression) simply uses the training data, which risks overfitting.
-
-The best solution takes advantage of cross validation. In cross validation, we split our training data into a series of folds, where each fold uses 80% of data for training and 20% for generating and evaluating predictions. Generally, that evaluation decides which model 'wins' between a series of competing models or hyper parameter combinations. In my case, I don't care about choosing another model, but I do care that through this process, the model generates **out of sample predictions** on its training data. As if by magic, it gives us a new dataset where the target is the residuals from the old dataset while keeping the residuals out of sample! 
+The best solution utilizes *cross validation*. In cross validation, we split our training data into a series of folds, where each fold uses 80% of data for training and 20% for generating and evaluating predictions. Generally, that evaluation decides which model 'wins' between a series of competing models or hyperparameter combinations. In my case, I don't care about choosing another model, but I do care that through this process, the model generates **out of sample predictions** on its training data. Cross validation gives us a new dataset where the target is the residuals from the old dataset while keeping the residuals out of sample! 
 ![cross_validation](images/cv_conformal.png)
 
 
@@ -448,6 +444,7 @@ def fit_model_and_mad_model(
 
 
 For computing the quantile, we do the following:
+
 - Predict the response
 - Predict the residuals
 - Scale the actual residuals by the predicted residuals
@@ -477,7 +474,7 @@ def compute_residuals_and_quantile_lwci(
 ```
 
 
-Once again, we can put everything together. First we'll create our conformal inference model. Then, we'll log it and register it with MLFlow. Finally we'll create a serving endpoint.
+As before, we put everything together. First we'll create our conformal inference model. Then, we'll log it and register it with MLFlow. Finally we'll create a serving endpoint.
 
 
 ```python
@@ -511,17 +508,13 @@ fig.show()
     Out of sample MAE: 56.73
 
 
-
     
 ![png](images/locally_weighted_conformal.png)
     
 
-
-
-Just like before our fitted model has the magical property of providing an upper and a lower bound without us needing to think about the internals of implementing a random forest at all. Only now we can see that the width of the interval is scaled by the uncertainty of the prediction.
+Like our original model, our result has the magical property of providing an upper and a lower bound without us needing to think about the internals of implementing a random forest at all. Only now we can see that the width of the interval is scaled by the uncertainty of the prediction.
 
 Now we can start logging our model, some metrics around it and our plot.  
-
 
 ```python
 
@@ -561,7 +554,7 @@ with mlflow.start_run():
 
 
 
-It is again a best practice to verify that the model works before creating a serving endpoint around it. Uncomment the cells below to test.
+It is again a best practice to verify that the model works before creating a serving endpoint around it. Uncomment the cells below to test. Then we can move on to serving the model.
 
 
 ```python
@@ -576,9 +569,9 @@ It is again a best practice to verify that the model works before creating a ser
 
 ## Serving the Model
 
-Everything is working in both of our models. Now it's time to serve them. Databricks serving endpoints are useful because they provide a scalable, highly available, and managed way to deploy machine learning models and features as real-time REST APIs for applications and systems to consume. Key benefits include simplicity through managed infrastructure, support for low-latency predictions, automatic scaling, and robust security within a secure network boundary. They enable seamless integration with external applications like web and mobile apps and allow for direct SQL access to models via AI Functions. 
+Databricks serving endpoints are useful because they provide a scalable, highly available, and managed way to deploy machine learning models and features as real-time REST APIs for applications and systems to consume. Key benefits include simplicity through managed infrastructure, support for low-latency predictions, automatic scaling, and robust security within a secure network boundary. They enable seamless integration with external applications like web and mobile apps and allow for direct SQL access to models via AI Functions. 
 
-In other words, they allow us to perform conformal inference at scale. I'll create one serving endpoint for locally weighted conformal inference. The steps are exactly the same to deploy the absolute conformal model 
+In other words, they allow us to perform conformal inference at scale. I'll create one serving endpoint for locally weighted conformal inference. The steps are exactly the same to deploy the absolute conformal model.
 
 
 ```python
@@ -695,7 +688,7 @@ get_or_create_endpoint(
      'description': ''}
 
 
-
+And finally, we can make predictions from our endpoint. Below I show how to use the Databricks MLFlow deployment client to make predictions, though a CURL request would work the same way.
 
 ```python
 payload = {
@@ -717,10 +710,9 @@ print(response)
     {'predictions': [{'predictions': -62.49456839573047, 'residual_predictions': 88.62607342804812, 'lower_bound': -217.81071054592053, 'upper_bound': 92.82157375445958}, {'predictions': 77.14216171682605, 'residual_predictions': 74.48775430133477, 'lower_bound': -53.39674391241931, 'upper_bound': 207.68106734607142}, {'predictions': -221.1448521278587, 'residual_predictions': 72.15888299943629, 'lower_bound': -347.6024384321672, 'upper_bound': -94.68726582355019}, {'predictions': 81.57720943627886, 'residual_predictions': 41.97131416225079, 'lower_bound': 8.022979349048441, 'upper_bound': 155.1314395235093}, {'predictions': 56.432414083054994, 'residual_predictions': 61.517387507669056, 'lower_bound': -51.376077631366684, 'upper_bound': 164.24090579747667}]}
 
 
-
 ## Conclusion
 
-In this exploration, we demonstrated how to implement conformal inference at scale using Databricks by examining both absolute conformal inference and locally weighted conformal inference approaches. We leveraged MLflow's experiment tracking and model registry capabilities to systematically log our conformal models, capturing not only the underlying predictive models but also the calibration data and conformity scores essential for generating valid prediction intervals. We registered these models so that they were accessible from Unity Catalog and then seamlessly deployed them as serving endpoints on Databricks, enabling real-time uncertainty quantification for production machine learning workloads with the scalability and reliability that enterprise applications demand. Using Databricks or not, conformal inference is a valuable technique to have in the data scientist's toolkit.
+In this post, I showed how to implement conformal inference at scale using Databricks by examining both absolute conformal inference and locally weighted conformal inference approaches. We leveraged MLflow's experiment tracking and model registry capabilities to systematically log our conformal models, capturing not only the underlying predictive models but also the calibration data and conformity scores essential for generating valid prediction intervals. We registered these models so that they were accessible from Unity Catalog and then seamlessly deployed them as serving endpoints on Databricks, enabling real-time uncertainty quantification for production machine learning workloads with the scalability and reliability that enterprise applications demand. Whether you build this on Databricks or not, conformal inference is a valuable technique in your toolkit.
 
-Conformal inference does not apply exclusively to regression. Stay tuned for uncertainty quantification in classification as well as time series problems! 
+I end by repeating that conformal inference does not apply exclusively to regression. Stay tuned for uncertainty quantification in classification as well as time series problems!
 
