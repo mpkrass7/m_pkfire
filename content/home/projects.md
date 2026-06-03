@@ -27,6 +27,8 @@ content:
   filter_button:
   - name: All
     tag: '*'
+  - name: Agentic
+    tag: agentic
   - name: R
     tag: R
   - name: Python

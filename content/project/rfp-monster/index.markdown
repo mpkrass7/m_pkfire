@@ -4,7 +4,7 @@ author: Marshall Krassenstein
 date: '2023-09-01'
 slug: rfp-monster
 categories: []
-tags: [python, llm, machine-learning, slackbot, streamlit]
+tags: [agentic, python, llm, machine-learning, slackbot, streamlit]
 subtitle: ''
 summary: 'An app I built to automate answering RFPs with Langchain and FAISS'
 authors: [Marshall Krassenstein]
