@@ -62,7 +62,7 @@ The repo lives at [databrickslabs/coding-agents-databricks-apps](https://github.
 
 I'm a contributor and maintainer for CoDA. Working with git and writing / reviewing code is nothing new for me. One thing that has been new for me is promoting it using this neat framework called 'remotion'. It renders scenes using react so it pairs well with coding agents. That's how I made the promo video. Another call out goes to Mureka, which I used to make the music. Specifically, I typed 'chill, ambient, happy' and clicked 'Create'. Technology is unbelievable. 
 
-I did the same thing for my mom to help her fundraise for an ALS bikeride earlier this week. She was quite pleased. Good son points. Here's her [donate link](tst.als.net/fundraise/?p=501671): 
+I did the same thing for my mom to help her fundraise for an ALS bikeride earlier this week. She was quite pleased. Good son points. Here's her [donate link](https://tst.als.net/fundraise/?p=501671): 
 
 <video src="./als-promo.mp4" controls preload="metadata" style="display:block;margin:0 auto;width:100%;max-width:320px;">
   Your browser does not support embedded video. <a href="./als-promo.mp4">Download the video</a>.
